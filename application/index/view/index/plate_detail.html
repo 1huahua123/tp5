@@ -1,0 +1,86 @@
+{include file='/common/head'}
+<body>
+    {include file='/common/header'}
+
+    <!-- ##### Breadcrumb Area Start ##### -->
+    <div class="vizew-breadcrumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{:url('index/index/index')}"><i class="fa fa-home" aria-hidden="true"></i> 主页</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"> 板块</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Breadcrumb Area End ##### -->
+
+    <!-- ##### Archive List Posts Area Start ##### -->
+    <div class="vizew-archive-list-posts-area mb-80">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    <!-- Archive Catagory & View Options -->
+                    <div class="archive-catagory-view mb-50 d-flex align-items-center justify-content-between">
+                        <!-- Catagory -->
+                        <div class="archive-catagory">
+                            <h4> 所有板块 </h4>
+                        </div>
+                    </div>
+                    {volist name="data" id="plate"}
+                    <!-- Single Post Area -->
+                    <div class="single-post-area style-2">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-md-6">
+                                <!-- Post Thumbnail -->
+                                <div class="post-thumbnail">
+                                    <img style="width: 400px;height:350px;" src="../../../../public{$plate.plate_avatar}" alt="">
+                                    <!-- Video Duration
+                                    <span class="video-duration">05.03</span> -->
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <!-- Post Content -->
+                                <div class="post-content mt-0">
+                                    <!-- <a href="#" class="post-cata cata-sm cata-success">Sports</a> -->
+                                    <a href="{:url('index/index/blog_list', ['id' => $plate.id])}" class="post-title mb-2">{$plate.plate_name}</a>
+                                    <div class="post-meta d-flex align-items-center mb-2">
+                                        <a href="#" class="post-author">{$plate.user.username}</a>
+                                        <i class="fa fa-circle" aria-hidden="true"></i>
+                                        <a href="#" class="post-date">{$plate.created_at}</a>
+                                    </div>
+                                    <p class="mb-2">{$plate.plate_profile}</p>
+                                    <div class="post-meta d-flex">
+                                        <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 123</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {/volist}
+                    <!-- Pagination -->
+                    <nav class="mt-50">
+                        {$data->render()}
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Archive List Posts Area End ##### -->
+
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area">
+        <div class="container">
+            <div class="row">
+                {include file='/common/foot_board_message'}
+                {include file='/common/foot_message_list'}
+                {include file='/common/foot_videos'}
+                {include file='/common/foot_address'}
+            </div>
+        </div>
+
+{include file='/common/foot'}

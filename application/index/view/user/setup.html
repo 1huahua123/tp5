@@ -1,0 +1,134 @@
+{include file='/common/head'}
+<body>
+{include file='/common/header'}
+<!-- ##### Breadcrumb Area Start ##### -->
+<div class="vizew-breadcrumb">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{:url('index/index/index')}"><i class="fa fa-home" aria-hidden="true"></i> 主页</a></li>
+            <li class="breadcrumb-item active" aria-current="page">设置</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ##### Breadcrumb Area End ##### -->
+<!-- ##### Login Area Start ##### -->
+<div class="vizew-login-area section-padding-80">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-6">
+        <div class="login-content">
+          <!-- Section Title -->
+          <div class="section-heading">
+            <h4>账号信息</h4>
+            <div class="line"></div>
+          </div>
+
+          <form action="{:url('index/user/doSetup')}" method="post">
+            <input type="hidden" name="user_id" value="{$user_data.id}">
+            <div class="form-group text-center">
+              <img src="/tp5/public{$user_data.avatar}" alt="网络出错" id="imgsrc" class="img-fluid rounded-circle" width="132" height="132" onclick="avatarimg()"/>
+              <input type="file" id="uploadimg" value="上传头像" hidden/>
+              <input type="hidden" name="avatar" id="avatar" value="{$user_data.avatar}"/>
+              <input type="hidden" name="thumb_avatar" id="thumb_avatar" value="{$user_data.thumb_avatar}"/>
+              <p>点击头像更改</p>
+            </div>
+            <div class="form-group">
+              <i class="bi bi-emoji-smile"></i>
+              <label class="form-label">用户名</label>
+              <input type="text" class="form-control" name="username" placeholder="请输入用户名" value="{$user_data.username}">
+            </div>
+            <div class="form-group">
+              <i class="bi bi-tag"></i>
+              <label class="form-label">标签</label>
+              <input type="text" class="form-control" name="user_label" placeholder="请输入标签" value="{$user_data.user_label}">
+            </div>
+            <div class="form-group">
+              <label class="form-label">性别</label>
+              <br>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="1">
+                <label class="form-check-label" for="inlineRadio1">男<i class="bi bi-gender-male"></i></label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="2">
+                <label class="form-check-label" for="inlineRadio2">女<i class="bi bi-gender-female"></i></label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="gender" id="inlineRadio3" value="3">
+                <label class="form-check-label" for="inlineRadio2">隐藏性别</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <i class="bi bi-calendar"></i>
+              <label class="form-label">生日</label>
+              <div id="sandbox-container">
+                <input type="text" class="form-control" name="birthday" placeholder="请选择生日" value="{$user_data.birthday}">
+              </div>
+            </div>
+            <button type="submit" class="btn vizew-btn w-100 mt-30">保存</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ##### Login Area End ##### -->
+
+<!-- ##### Footer Area Start ##### -->
+<footer class="footer-area">
+  <div class="container">
+    <div class="row">
+      {include file='/common/foot_board_message'}
+      {include file='/common/foot_message_list'}
+      {include file='/common/foot_videos'}
+      {include file='/common/foot_address'}
+    </div>
+  </div>
+{include file='/common/foot'}
+  <script>
+    $('#sandbox-container input').datepicker({
+      language: "zh-CN",
+      autoclose: true,
+      format: "yyyy-mm-dd"
+    });
+  </script>
+
+  <script>
+    function avatarimg()
+    {
+      $('#uploadimg').click().change(function(event){
+        var formData = new FormData();
+        formData.append("file", $(this).get(0).files[0]);
+        $.ajax({
+          url:"{:url('index/common/upload')}",
+          type:'POST',
+          data:formData,
+          cache: false,
+          contentType: false,    //不可缺
+          processData: false,    //不可缺
+          success:function(data){
+            console.log(data);
+            if(data.code ==  200){
+              $('#avatar').val(data.filename);
+              $('#thumb_avatar').val(data.thumb);
+              $('#imgsrc').attr("src","/tp5/public"+data.filename);
+              alert(data.msg);
+            }else if(data.code == 204){
+              alert(data.msg);
+            }else if(data.code == 205){
+              alert(data.msg);
+            }
+          },
+          error:function(data){
+            alert("上传失败");
+          }
+        });
+      });
+    }
+  </script>

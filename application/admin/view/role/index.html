@@ -1,0 +1,41 @@
+{include file='/common/header'}
+{include file='/common/top'}
+<main class="content">
+    <div class="row">
+        <div class="col-sm-6">
+            <a href="{:url('admin/role/create')}" class="btn btn-primary btn-lg"><i class="bi bi-plus-circle">添加角色</i></a>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">角色名称</th>
+                <th scope="col">拥有的权限</th>
+                <th scope="col">创建时间</th>
+                <th scope="col">修改时间</th>
+                <th scope="col">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+            {volist name="data" id="vo" empty="暂时没有数据"}
+              <tr>
+                <td>{$vo.role_name}</td>
+                <td>{$vo.role_auth_ids}</td>
+                <td>{$vo.created_at}</td>
+                <td>{$vo.updated_at}</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                        <a href="{:url('admin/role/delete',['id'=>$vo.id])}" class="btn btn-danger" onclick="return confirm('确定删除吗?');">删除</a>
+                        <a href="{:url('admin/role/update',['id'=>$vo.id])}" class="btn btn-warning">修改</a>
+                        <a href="{:url('admin/role/setauth',['id'=>$vo.id])}" class="btn btn-success">分配权限</a>
+                        <a href="{:url('admin/role/clearallauth',['id'=>$vo.id])}" class="btn btn-danger">清除权限</a>
+                    </div>
+                </td>
+              </tr>
+            {/volist}
+            </tbody>
+          </table>
+    </div>
+</main>
+{include file='/common/footer'}

@@ -1,0 +1,193 @@
+{include file='/common/head'}
+<body>
+{include file='/common/header'}
+<!-- ##### Breadcrumb Area Start ##### -->
+<div class="vizew-breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{:url('index/index/index')}"><i class="fa fa-home" aria-hidden="true"></i> 首页</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">注册</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Breadcrumb Area End ##### -->
+
+<!-- ##### Login Area Start ##### -->
+<div class="vizew-login-area section-padding-80">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6">
+                <div class="login-content">
+                    <!-- Section Title -->
+                    <div class="section-heading">
+                        <h4>注册账号</h4>
+                        <div class="line"></div>
+                    </div>
+
+                    <form action="{:url('index/login/doregist')}" method="post">
+                        <div class="form-group text-center">
+                            <img src="/tp5/public/static/img/avatars/avatar6.jpeg" alt="网络出错" id="imgsrc" class="img-fluid rounded-circle" width="132" height="132" onclick="avatarimg()"/>
+                            <input type="file" id="uploadimg" value="上传头像" hidden/>
+                            <input type="hidden" name="avatar" id="avatar" value="/static/img/avatars/avatar6.jpeg"/>
+                            <input type="hidden" name="thumb_avatar" id="thumb_avatar" value="/static/img/avatars/avatar6.jpeg"/>
+                            <p>点击头像上传</p>
+                        </div>
+                        <div class="form-group">
+                            <i class="bi bi-emoji-smile"></i>
+                            <label class="form-label">用户名</label>
+                            <input type="text" class="form-control" name="username" placeholder="请输入用户名" style="background: white;">
+                        </div>
+                        <div class="form-group">
+                            <i class="bi bi-person-circle"></i>
+                            <label class="form-label">账号</label>
+                            <input type="text" class="form-control" name="account" placeholder="请输入账号" style="background: white;">
+                        </div>
+                        <div class="form-group">
+                            <i class="bi bi-envelope"></i>
+                            <label class="form-label">邮箱</label>
+                            <input type="email" class="form-control" name="email" id="exampleInputEmail1" placeholder="请输入邮箱" style="background: white;">
+                            <button type="button" id="emailbtn" class="btn btn-info btn-sm" onclick="getcode()">获取验证码</button>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="code" class="form-control" placeholder="请输入验证码" style="background: white;">
+                        </div>
+                        <div class="form-group">
+                            <i class="bi bi-shield-lock"></i>
+                            <label class="form-label">密码</label>
+                            <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="请输入密码" style="background: white;">
+                        </div>
+                        <div class="form-group">
+                            <i class="bi bi-shield-lock"></i>
+                            <label class="form-label">重复密码</label>
+                            <input type="password" class="form-control" name="pass" id="exampleeInputPassword2" placeholder="请再次输入密码" style="background: white;">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">性别</label>
+                            <br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="1">
+                                <label class="form-check-label" for="inlineRadio1">男<i class="bi bi-gender-male"></i></label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="2">
+                                <label class="form-check-label" for="inlineRadio2">女<i class="bi bi-gender-female"></i></label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="inlineRadio3" value="3">
+                                <label class="form-check-label" for="inlineRadio2">隐藏性别</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <i class="bi bi-calendar"></i>
+                            <label class="form-label">生日</label>
+                            <div id="sandbox-container">
+                                <input type="text" class="form-control" name="birthday" placeholder="请选择生日" style="background: white;">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn vizew-btn w-100 mt-30">注册</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Login Area End ##### -->
+<!-- ##### Footer Area Start ##### -->
+<footer class="footer-area">
+    <div class="container">
+        <div class="row">
+            {include file='/common/foot_board_message'}
+            {include file='/common/foot_message_list'}
+            {include file='/common/foot_videos'}
+            {include file='/common/foot_address'}
+        </div>
+    </div>
+
+{include file='/common/foot'}
+
+<script>
+    function getcode()
+    {
+        $.ajax({
+            url:"{:url('index/login/send_email')}",
+            type:'POST',
+            data:{email:$('#exampleInputEmail1').val()},
+            success: function(data){
+                if(data.code == 200){
+                    console.log(1);
+                    timefsyzm_old();
+                }else{
+                    console.log(2);
+                }
+            },
+            error: function(data){
+                alert("请输入邮箱账号或者确认网络通畅,获取验证码失败！");
+            }
+        })
+    }
+
+    var oldwait = 60;
+    function timefsyzm_old(){
+        var obj = $("#send_code");
+        if (oldwait == 0){
+            $(obj).attr("onclick", "get_code()");
+            $(obj).html("获取验证码");
+            oldwait = 60;
+        }else{
+            $(obj).removeAttr("onclick");
+            $(obj).html("重新发送("+ oldwait +")");
+            oldwait--;
+            setTimeout(function(){
+                timefsyzm_old();
+            },1000)
+        }
+    }
+</script>
+
+<script>
+    $('#sandbox-container input').datepicker({
+        language: "zh-CN",
+        autoclose: true,
+        format: "yyyy-mm-dd"
+    });
+</script>
+
+<script>
+    function avatarimg()
+    {
+        $('#uploadimg').click().change(function(event){
+            var formData = new FormData();
+            formData.append("file", $(this).get(0).files[0]);
+            $.ajax({
+                url:"{:url('index/common/upload')}",
+                type:'POST',
+                data:formData,
+                cache: false,
+                contentType: false,    //不可缺
+                processData: false,    //不可缺
+                success:function(data){
+                    console.log(data);
+                    if(data.code ==  200){
+                        $('#avatar').val(data.filename);
+                        $('#thumb_avatar').val(data.thumb);
+                        $('#imgsrc').attr("src","/tp5/public"+data.filename);
+                        alert(data.msg);
+                    }else if(data.code == 204){
+                        alert(data.msg);
+                    }else if(data.code == 205){
+                        alert(data.msg);
+                    }
+                },
+                error:function(data){
+                    alert("上传失败");
+                }
+            });
+        });
+    }
+</script>

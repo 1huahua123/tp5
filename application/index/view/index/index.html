@@ -1,0 +1,328 @@
+{include file='/common/head'}
+
+<body>
+{include file='/common/header'}
+    <!-- ##### Hero Area Start ##### -->
+    <section class="hero--area section-padding-80">
+        <div class="container">
+            <div class="row no-gutters">
+                <div class="col-12 col-md-7 col-lg-8">
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="post-1" role="tabpanel" aria-labelledby="post-1-tab">
+                            <!-- Single Feature Post -->
+                            <div class="single-feature-post video-post bg-img" style="background-image: url(/tp5/public{$hot.blog_cover});width: 800px;height: 500px;">
+                                <!-- Play Button -->
+                                <a href="{:url('index/index/detail',['id'=>$hot.id])}" class="btn play-btn"><i class="fa fa-play" aria-hidden="true"></i></a>
+
+                                <!-- Post Content -->
+                                <div class="post-content">
+                                    <a href="#" class="post-cata">{$hot.plate.plate_name}</a>
+                                    <a href="{:url('index/index/detail',['id'=>$hot.id])}" class="post-title">{$hot.blog_title}</a>
+                                    <div class="post-meta d-flex">
+                                        <a href="{:url('index/index/detail',['id'=>$hot.id])}"><i class="fa fa-comments-o" aria-hidden="true"></i> {$hot.blog_comments}</a>
+                                        <a href="{:url('index/index/detail',['id'=>$hot.id])}"><i class="fa fa-eye" aria-hidden="true"></i> {$hot.blog_views}</a>
+                                        <a href="{:url('index/index/detail',['id'=>$hot.id])}"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {$hot.blog_likes}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-5 col-lg-4">
+                    <ul class="nav vizew-nav-tab" role="tablist">
+                        {volist name="blog" id="blog"}
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{:url('index/index/detail',['id'=>$blog.id])}" role="tab" aria-controls="post-1" aria-selected="true">
+                                <!-- Single Blog Post -->
+                                <div class="single-blog-post style-2 d-flex align-items-center">
+                                    <div class="post-thumbnail">
+                                        <img src="/tp5/public{$blog.blog_cover}" style="width: 200px;height: 85px;" alt="">
+                                    </div>
+                                    <div class="post-content">
+                                        <h6 class="post-title">{$blog.blog_title}</h6>
+                                        <div class="post-meta d-flex justify-content-between">
+                                            <span><i class="fa fa-comments-o" aria-hidden="true"></i>  {$blog.blog_comments}</span>
+                                            <span><i class="fa fa-eye" aria-hidden="true"></i>  {$blog.blog_views}</span>
+                                            <span><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>  {$blog.blog_likes}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        {/volist}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Hero Area End ##### -->
+
+    <!-- ##### Trending Posts Area Start ##### -->
+    <section class="trending-posts-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Section Heading -->
+                    <div class="section-heading">
+                        <h4>热议资讯</h4>
+                        <div class="line"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Single Blog Post -->
+                {volist name="hot_discussion" id="hot_discussion"}
+                <div class="col-12 col-md-4">
+                    <div class="single-post-area mb-80">
+                        <!-- Post Thumbnail -->
+                        <div class="post-thumbnail">
+                            <img src="/tp5/public{$hot_discussion.blog_cover}" style="width: 400px;height: 200px;" alt="">
+
+                            <!-- Video Duration -->
+                            <span class="video-duration">05.03</span>
+                        </div>
+
+                        <!-- Post Content -->
+                        <div class="post-content">
+                            <a href="#" class="post-cata cata-sm cata-success">{$hot_discussion.plate.plate_name}</a>
+                            <a href="{:url('index/index/detail', ['id' => $hot_discussion.id])}" class="post-title">{$hot_discussion.blog_title}</a>
+                            <div class="post-meta d-flex">
+                                <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> {$hot_discussion.blog_comments}</a>
+                                <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> {$hot_discussion.blog_views}</a>
+                                <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {$hot_discussion.blog_likes}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {/volist}
+            </div>
+
+        </div>
+    </section>
+    <!-- ##### Trending Posts Area End ##### -->
+
+    <!-- ##### Vizew Post Area Start ##### -->
+    <section class="vizew-post-area mb-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-7 col-lg-8">
+                    <div class="all-posts-area">
+                        <!-- Section Heading -->
+                        <div class="section-heading style-2">
+                            <h4>精选资讯</h4>
+                            <div class="line"></div>
+                        </div>
+
+                        <!-- Featured Post Slides -->
+                        <div class="featured-post-slides owl-carousel mb-30">
+                            {volist name="featured" id="featured"}
+                            <!-- Single Feature Post -->
+                            <div class="single-feature-post video-post bg-img" style="background-image: url(/tp5/public{$featured.blog_cover});">
+                                <!-- Play Button -->
+                                <a href="video-post.html" class="btn play-btn"><i class="fa fa-play" aria-hidden="true"></i></a>
+
+                                <!-- Post Content -->
+                                <div class="post-content">
+                                    <a href="#" class="post-cata">{$featured.plate.plate_name}</a>
+                                    <a href="{:url('index/index/detail', ['id' => $featured.id])}" class="post-title">{$featured.blog_title}</a>
+                                    <div class="post-meta d-flex">
+                                        <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> {$featured.blog_comments}</a>
+                                        <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> {$featured.blog_views}</a>
+                                        <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {$featured.blog_likes}</a>
+                                    </div>
+                                </div>
+
+                                <!-- Video Duration -->
+                                <span class="video-duration">{$featured.created_at}</span>
+                            </div>
+                            {/volist}
+                        </div>
+
+                        <div class="row">
+                            <!-- Single Blog Post -->
+                            {volist name="most_views_two" id="most_views_two"}
+                            <div class="col-12 col-md-6">
+                                <div class="single-post-area mb-80">
+                                    <!-- Post Thumbnail -->
+                                    <div class="post-thumbnail">
+                                        <img src="/tp5/public{$most_views_two.blog_cover}" style="width: 500px;height: 300px;" alt="">
+
+                                        <!-- Video Duration -->
+                                        <span class="video-duration">{$most_views_two.created_at}</span>
+                                    </div>
+
+                                    <!-- Post Content -->
+                                    <div class="post-content">
+                                        <a href="{:url('index/index/blog_list', ['id' => $most_views_two.plate.id])}" class="post-cata cata-sm cata-danger">{$most_views_two.plate.plate_name}</a>
+                                        <a href="{:url('index/index/detail', ['id' => $most_views_two.id])}" class="post-title">{$most_views_two.blog_title}</a>
+                                        <div class="post-meta d-flex">
+                                            <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> {$most_views_two.blog_comments}</a>
+                                            <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> {$most_views_two.blog_views}</a>
+                                            <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {$most_views_two.blog_likes}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {/volist}
+                        </div>
+
+                        <!-- Section Heading -->
+                        <div class="section-heading style-2">
+                            <h4>最新资讯</h4>
+                            <div class="line"></div>
+                        </div>
+
+                        <!-- Featured Post Slides -->
+                        <div class="featured-post-slides owl-carousel mb-30">
+                            {volist name="latest_blog" id="latest_blog"}
+                            <!-- Single Feature Post -->
+                            <div class="single-feature-post video-post bg-img" style="background-image: url(/tp5/public{$latest_blog.blog_cover});">
+                                <!-- Post Content -->
+                                <div class="post-content">
+                                    <a href="{:url('index/index/blog_list', ['id' => $latest_blog.plate.id])}" class="post-cata">{$latest_blog.plate.plate_name}</a>
+                                    <a href="{:url('index/index/detail', ['id' => $latest_blog.id])}" class="post-title">{$latest_blog.blog_title}</a>
+                                    <div class="post-meta d-flex">
+                                        <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> {$latest_blog.blog_comments}</a>
+                                        <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> {$latest_blog.blog_views}</a>
+                                        <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {$latest_blog.blog_likes}</a>
+                                    </div>
+                                </div>
+
+                                <!-- Video Duration -->
+                                <span class="video-duration">{$latest_blog.created_at}</span>
+                            </div>
+                            {/volist}
+                        </div>
+                        {volist name="latest_blog_four" id="latest_blog_four"}
+                        <!-- Single Post Area -->
+                        <div class="single-post-area mb-30">
+                            <div class="row align-items-center">
+                                <div class="col-12 col-lg-6">
+                                    <!-- Post Thumbnail -->
+                                    <div class="post-thumbnail">
+                                        <img src="/tp5/public{$latest_blog_four.blog_cover}" alt="网络出错" style="width: 400px;height: 220px;">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <!-- Post Content -->
+                                    <div class="post-content mt-0">
+                                        <a href="{:url('index/index/blog_list', ['id' => $latest_blog_four.plate.id])}" class="post-cata cata-sm cata-success">{$latest_blog_four.plate.plate_name}</a>
+                                        <a href="{:url('index/index/detail', ['id' => $latest_blog_four.id])}" class="post-title mb-2">{$latest_blog_four.blog_title}</a>
+                                        <div class="post-meta d-flex align-items-center mb-2">
+                                            <a href="#" class="post-author">{$latest_blog_four.user.username}</a>
+                                            <i class="fa fa-circle" aria-hidden="true"></i>
+                                            <a href="#" class="post-date">{$latest_blog_four.created_at}</a>
+                                        </div>
+                                        
+                                        <div class="post-meta d-flex">
+                                            <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> {$latest_blog_four.blog_comments}</a>
+                                            <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> {$latest_blog_four.blog_views}</a>
+                                            <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {$latest_blog_four.blog_likes}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/volist}
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-5 col-lg-4">
+                    <div class="sidebar-area">
+
+                        <!-- ***** Single Widget ***** -->
+                        <div class="single-widget followers-widget mb-50">
+                            <a href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i><span class="counter">{$all_blog_count}</span><span>资讯数量</span></a>
+                            <a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i><span class="counter">{$all_users_count}</span><span>用户人数</span></a>
+                            <a href="#" class="google"><i class="fa fa-google" aria-hidden="true"></i><span class="counter">1000</span><span>创作者数量</span></a>
+                        </div>
+                        <!-- ***** Single Widget ***** -->
+                        <div class="single-widget add-widget mb-50" style="background-color: aliceblue;">
+                            <a href="#"><img src="" alt="广告位"></a>
+                        </div>
+
+                        <!-- ***** Sidebar Widget ***** -->
+                        <div class="single-widget youtube-channel-widget mb-50">
+                            <!-- Section Heading -->
+                            <div class="section-heading style-2 mb-30">
+                                <h4>热门游戏</h4>
+                                <div class="line"></div>
+                            </div>
+                            {volist name="hot_game_plate" id="hot_game_plate"}
+                            <!-- Single YouTube Channel -->
+                            <div class="single-youtube-channel d-flex align-items-center">
+                                <div class="youtube-channel-thumbnail">
+                                    <img src="/tp5/public{$hot_game_plate.plate_avatar}" alt="" style="width: 200px;height: 100px;">
+                                </div>
+                                <div class="youtube-channel-content">
+                                    <a href="#" class="channel-title">{$hot_game_plate.plate_name}</a>
+                                    <a href="{:url('index/index/blog_list', ['id' => $hot_game_plate.id])}" class="btn subscribe-btn"><i class="bi bi-hand-index"></i> 进入</a>
+                                </div>
+                            </div>
+                            {/volist}
+                        </div>
+
+                        <!-- ***** Single Widget ***** -->
+                        <div class="single-widget newsletter-widget mb-50">
+                            <!-- Section Heading -->
+                            <div class="section-heading style-2 mb-30">
+                                <h4>申请管理员</h4>
+                                <div class="line"></div>
+                            </div>
+                            <p>如果你想成为管理员，请联系我们</p>
+                            <!-- Newsletter Form -->
+                            <div class="newsletter-form">
+                                <form action="{:url('index/index/apply_To_Become_A_Section_Administrator')}" method="post">
+                                    <input type="text" name="plate_name" class="form-control md-15" id="plate_name" placeholder="输入板块的名称">
+                                    <input type="text" name="application_reason" class="form-control md-15" id="application_reason" placeholder="输入申请理由">
+                                    <button type="submit" class="btn vizew-btn w-100">申请</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- ***** Single Widget ***** -->
+                        <div class="single-widget mb-50">
+                            <!-- Section Heading -->
+                            <div class="section-heading style-2 mb-30">
+                                <h4>查看最多的资讯</h4>
+                                <div class="line"></div>
+                            </div>
+                            {volist name="most_views" id="most_views"}
+                            <!-- Single Blog Post -->
+                            <div class="single-blog-post d-flex">
+                                <div class="post-thumbnail">
+                                    <img src="/tp5/public{$most_views.blog_cover}" style="width: 200px;height: 70px;" alt="">
+                                </div>
+                                <div class="post-content">
+                                    <a href="{:url('index/index/detail', ['id' => $most_views.id])}" class="post-title">{$most_views.blog_title}</a>
+                                    <div class="post-meta d-flex justify-content-between">
+                                        <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> {$most_views.blog_comments}</a>
+                                        <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> {$most_views.blog_views}</a>
+                                        <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {$most_views.blog_likes}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {/volist}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Vizew Psot Area End ##### -->
+
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area">
+        <div class="container">
+            <div class="row">
+                {include file='/common/foot_board_message'}
+                {include file='/common/foot_message_list'}
+                {include file='/common/foot_videos'}
+                {include file='/common/foot_address'}
+            </div>
+        </div>
+
+{include file='/common/foot'}

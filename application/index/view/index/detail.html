@@ -1,0 +1,300 @@
+{include file='/common/head'}
+<body>
+{include file='/common/header'}
+<!-- ##### Breadcrumb Area Start ##### -->
+<div class="vizew-breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{:url('index/index/index')}"><i class="fa fa-home" aria-hidden="true"></i> 主页</a></li>
+                        <li class="breadcrumb-item"><a href="{:url('index/index/blog_list', ['id' => $blog.plate.id])}">{$blog.plate.plate_name}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{$blog.blog_title}</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Breadcrumb Area End ##### -->
+
+<!-- ##### Pager Area Start ##### -->
+<div class="vizew-pager-area">
+    {if ($previous.id != '')}
+    <div class="vizew-pager-prev">
+        <p><i class="bi bi-arrow-down-square-fill"></i></p>
+
+        <!-- Single Feature Post -->
+        <div class="single-feature-post video-post bg-img pager-article" style="background-image: url(/tp5/public{$previous.blog_cover});">
+            <!-- Post Content -->
+            <div class="post-content">
+                <a href="#" class="post-cata cata-sm cata-success">{$previous.plate.plate_name}</a>
+                <a href="{:url('index/index/detail',['id'=>$previous.id])}" class="post-title">{$previous.blog_title}</a>
+                <div class="post-meta d-flex">
+                    <a href="{:url('index/index/detail',['id'=>$previous.id])}"><i class="fa fa-comments-o" aria-hidden="true"></i> {$previous.blog_comments}</a>
+                    <a href="{:url('index/index/detail',['id'=>$previous.id])}"><i class="fa fa-eye" aria-hidden="true"></i> {$previous.blog_views}</a>
+                    <a href="{:url('index/index/detail',['id'=>$previous.id])}"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {$previous.blog_likes}</a>
+                </div>
+            </div>
+            <!-- Video Duration -->
+            <span class="video-duration">{$previous.created_at}</span>
+        </div>
+    </div>
+    {/if}
+    {if ($next.id != '')}
+    <div class="vizew-pager-next">
+        <p><i class="bi bi-arrow-up-square-fill"></i></p>
+
+        <!-- Single Feature Post -->
+        <div class="single-feature-post video-post bg-img pager-article" style="background-image: url(/tp5/public{$next.blog_cover});">
+            <!-- Post Content -->
+            <div class="post-content">
+                <a href="#" class="post-cata cata-sm cata-business">{$next.plate.plate_name}</a>
+                <a href="{:url('index/index/detail',['id'=>$next.id])}" class="post-title">{$next.blog_title}</a>
+                <div class="post-meta d-flex">
+                    <a href="{:url('index/index/detail',['id'=>$previous.id])}"><i class="fa fa-comments-o" aria-hidden="true"></i> {$next.blog_comments}</a>
+                    <a href="{:url('index/index/detail',['id'=>$previous.id])}"><i class="fa fa-eye" aria-hidden="true"></i> {$next.blog_views}</a>
+                    <a href="{:url('index/index/detail',['id'=>$previous.id])}"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {$next.blog_likes}</a>
+                </div>
+            </div>
+            <!-- Video Duration -->
+            <span class="video-duration">{$next.created_at}</span>
+        </div>
+    </div>
+    {/if}
+</div>
+<!-- ##### Pager Area End ##### -->
+
+<!-- ##### Post Details Area Start ##### -->
+<section class="post-details-area mb-80">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="post-details-thumb mb-50">
+                    <img src="/tp5/public{$blog.blog_cover}" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <!-- Post Details Content Area -->
+            <div class="col-12 col-lg-8 col-xl-7">
+                <div class="post-details-content">
+                    <!-- Blog Content -->
+                    <div class="blog-content">
+
+                        <!-- Post Content -->
+                        <div class="post-content mt-0">
+                            <a href="#" class="post-cata cata-sm cata-danger">{$blog.plate.plate_name}</a>
+                            <a href="#" class="post-title mb-2">{$blog.blog_title}</a>
+
+                            <div class="d-flex justify-content-between mb-30">
+                                <div class="post-meta d-flex align-items-center">
+                                    <a href="#" class="post-author">{$blog.user.username}</a>
+                                    <i class="fa fa-circle" aria-hidden="true"></i>
+                                    <a href="#" class="post-date">{$blog.created_at}</a>
+                                    <i class="fa fa-circle" aria-hidden="true"></i>
+                                    {empty name="$collect_blog"}
+                                    <a href="{:url('index/index/collect', ['id' => $blog.id])}">收藏</a>
+                                    {else /}
+                                    <a href="{:url('index/index/cancel_collect', ['id' => $blog.id])}">取消收藏</a>
+                                    {/empty}
+                                </div>
+                                <div class="post-meta d-flex">
+                                    <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> {$blog.blog_comments}</a>
+                                    <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> {$blog.blog_views}</a>
+                                    <a href="{:url('index/index/dianzan',['id' => $blog.id])}"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {$blog.blog_likes}</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="post-content mt-0">
+                            {$blog.blog_content}
+                        </div>
+
+                        <!-- Post Tags -->
+                        <div class="post-tags mt-30">
+                            <ul>
+                                <li><a href="#">HealthFood</a></li>
+                                <li><a href="#">Sport</a></li>
+                                <li><a href="#">{$blog.plate.plate_name}</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Related Post Area -->
+                        <div class="related-post-area mt-5">
+                            <!-- Section Title -->
+                            <div class="section-heading style-2">
+                                <h4>相关资讯</h4>
+                                <div class="line"></div>
+                            </div>
+
+                            <div class="row">
+                                {volist name="related" id="related"}
+                                <!-- Single Blog Post -->
+                                <div class="col-12 col-md-6">
+                                    <div class="single-post-area mb-50">
+                                        <!-- Post Thumbnail -->
+                                        <div class="post-thumbnail">
+                                            <img src="/tp5/public{$related.blog_cover}" style="width: 500px;height: 250px;" alt="">
+
+                                            <!-- Video Duration -->
+                                            <span class="video-duration">05.03</span>
+                                        </div>
+
+                                        <!-- Post Content -->
+                                        <div class="post-content">
+                                            <a href="#" class="post-cata cata-sm cata-success">{$related.plate.plate_name}</a>
+                                            <a href="{:url('index/index/detail',['id' => $related.id])}" class="post-title">{$related.blog_title}</a>
+                                            <div class="post-meta d-flex">
+                                                <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> {$related.blog_comments}</a>
+                                                <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> {$related.blog_views}</a>
+                                                <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {$related.blog_likes}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/volist}
+                            </div>
+                        </div>
+
+                        <!-- Comment Area Start -->
+                        <div class="comment_area clearfix mb-50">
+                            <!-- Post A Comment Area -->
+                            <div class="post-a-comment-area">
+
+                                <!-- Section Title -->
+                                <div class="section-heading style-2">
+                                    <h4>评论回复</h4>
+                                    <div class="line"></div>
+                                </div>
+
+                                <!-- Reply Form -->
+                                <div class="contact-form-area">
+                                    <form action="{:url('index/comment/reply', ['id' => $blog.id])}" method="post">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <textarea name="content" class="form-control" id="message" placeholder="欢迎留下你的评论" style="background-color: bisque;"></textarea>
+                                            </div>
+                                            <div class="col-12">
+                                                <button class="btn vizew-btn mt-30" type="submit">评论</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <hr>
+                            <!-- Section Title -->
+                            <div class="section-heading style-2">
+                                <h4>评论列表</h4>
+                                <div class="line"></div>
+                            </div>
+                            <ul>
+                                {foreach $top_comment as $t_comment}
+                                <div class="row">
+                                    <li class="single-comment-area">
+                                        <div class="comment-content d-flex">
+                                            <div class="comment-author">
+                                                <img src="/tp5/public{$t_comment.user.avatar}" alt="author">
+                                            </div>
+                                            <div class="comment-meta">
+                                                <a href="#" class="comment-date">{$t_comment.created_at}</a>
+                                                <h6>{$t_comment.user.username}</h6>
+                                                <p>{$t_comment.content}</p>
+                                                <div class="d-flex align-items-center">
+                                                    <a href="#" class="like">点赞</a>
+                                                    <a href="#" class="reply">回复</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {foreach $second_comment as $s_comment}
+                                        {if ($s_comment.pid == $t_comment.id)}
+                                        <div class="row">
+                                            <ol class="children">
+                                                <li class="single_comment_area">
+                                                    <!-- Comment Content -->
+                                                    <div class="comment-content d-flex">
+                                                        <!-- Comment Author -->
+                                                        <div class="comment-author">
+                                                            <img src="/tp5/public{$s_comment.user.avatar}" alt="author">
+                                                        </div>
+                                                        <!-- Comment Meta -->
+                                                        <div class="comment-meta">
+                                                            <a href="#" class="comment-date">{$s_comment.created_at}</a>
+                                                            <h6>{$s_comment.user.username} 回复：{$s_comment.puser_name}</h6>
+                                                            <p>{$s_comment.content}</p>
+                                                            <div class="d-flex align-items-center">
+                                                                <a href="#" class="like">点赞</a>
+                                                                <a href="#" class="reply">回复</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                        {/if}
+                                        {/foreach}
+                                    </li>
+                                </div>
+                                {/foreach}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar Widget -->
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                <div class="sidebar-area">
+
+                    <!-- ***** Single Widget ***** -->
+                    <div class="single-widget share-post-widget mb-50">
+                        <p>Share This Post</p>
+                        <a href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a>
+                        <a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</a>
+                        <a href="#" class="google"><i class="fa fa-google" aria-hidden="true"></i> Google+</a>
+                    </div>
+
+                    <!-- ***** Single Widget ***** -->
+                    <div class="single-widget p-0 author-widget">
+                        <div class="p-4">
+                            <img class="author-avatar" src="/tp5/public{$blog.user.avatar}" alt="">
+                            <a href="#" class="author-name">{$blog.user.username}</a>
+                            <div class="author-social-info">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-pinterest"></i></a>
+                            </div>
+                            {empty name="$blog.user.user_label"}
+                            <p>这个人很懒，暂时没有标签</p>
+                            {else /}
+                            <p>{$blog.user.user_label}</p>
+                            {/empty}
+                        </div>
+
+                        <div class="authors--meta-data d-flex">
+                            <p>粉丝<span class="counter">{$blog.user.fans}</span></p>
+                            <p>资讯数<span class="counter">{$all_blog_released_by_author_count}</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### Post Details Area End ##### -->
+<!-- ##### Footer Area Start ##### -->
+<footer class="footer-area">
+    <div class="container">
+        <div class="row">
+            {include file='/common/foot_board_message'}
+            {include file='/common/foot_message_list'}
+            {include file='/common/foot_videos'}
+            {include file='/common/foot_address'}
+        </div>
+    </div>
+{include file='/common/foot'}
+<script>
+    
+</script>

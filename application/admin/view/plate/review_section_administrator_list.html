@@ -1,0 +1,41 @@
+{include file='/common/header'}
+{include file='/common/top'}
+<main class="content">
+  <div class="row">
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">申请人</th>
+        <th scope="col">申请板块</th>
+        <th scope="col">申请理由</th>
+        <th scope="col">申请时间</th>
+        <th scope="col">申请状态</th>
+        <th scope="col">操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      {volist name = "data" id = "vo" empty="暂时没有数据"}
+      <tr>
+        <td>{$vo.user.username}</td>
+        <td>{$vo.plate_name}</td>
+        <td>{$vo.application_reason}</td>
+        <td>{:date('Y-m-d H:i:s',$vo.created_at)}</td>
+        <td>{$vo.state}</td>
+        {if condition="$vo.state == '审核中' "}
+        <td>
+          <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+            <a href="{:url('admin/plate/pass', ['id' => $vo.id])}" class="btn btn-success">通过</a>
+            <a href="{:url('admin/plate/no_pass', ['id' => $vo.id])}" class="btn btn-danger">不通过</a>
+          </div>
+        </td>
+        {/if}
+      </tr>
+      {/volist}
+      </tbody>
+    </table>
+  </div>
+  <div style="padding-left: 30%;">
+    {$data->render()}
+  </div>
+</main>
+{include file='/common/footer'}

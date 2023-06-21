@@ -1,0 +1,39 @@
+{include file='/common/header'}
+{include file='/common/top'}
+<main class="content">
+    <div class="row">
+        <form action="{:url('admin/role/doupdate')}" method="post">
+            <input type="hidden" name="role_id" value="{$role.id}">
+            <div class="mb-3">
+                <label class="form-label">角色名称</label>
+                <input class="form-control form-control-lg" type="text" name="role_name" placeholder="输入角色名称" value="{$role.role_name}"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">拥有的权限</label>
+                <table class="table">
+                    <tbody>
+                    {foreach $top_auth as $top_v}
+                      <tr>
+                        <td>
+                            <label class="form-label">顶级权限：</label>
+                            <input class="form-check-input top_auth" type="checkbox" name="id[]" value="{$top_v.id}" {in name="top_v.id" value="$role.role_auth_ids"} checked="checked"{/in}>{$top_v.auth_name}
+                        </td>
+                        <td>
+                            {foreach $second_auth as $second_v}
+                                {if ($second_v.pid eq $top_v.id)}
+                                <input class="form-check-input second_auth" type="checkbox" name="id[]" value="{$second_v.id}" {in name="second_v.id" value="$role.role_auth_ids"} checked="checked"{/in}>{$second_v.auth_name}
+                                {/if}
+                            {/foreach}
+                        </td>
+                      </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary btn-lg">修改</button>
+            </div>
+        </form>
+    </div>
+</main>
+{include file='/common/footer'}

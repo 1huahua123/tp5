@@ -1,0 +1,22 @@
+<!-- Footer Widget Area -->
+<div class="col-12 col-sm-6 col-xl-3">
+    <div class="footer-widget mb-70">
+        <h6 class="widget-title">精选资讯</h6>
+        {volist name="foot_videos_data" id="foot_videos_data"}
+        <!-- Single Blog Post -->
+        <div class="single-blog-post d-flex">
+            <div class="post-thumbnail">
+                <img src="/tp5/public{$foot_videos_data.blog_cover}" alt="">
+            </div>
+            <div class="post-content">
+                <a href="single-post.html" class="post-title">{$foot_videos_data.blog_title}</a>
+                <div class="post-meta d-flex justify-content-between">
+                    <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> {$foot_videos_data.blog_comments}</a>
+                    <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> {$foot_videos_data.blog_views}</a>
+                    <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {$foot_videos_data.blog_likes}</a>
+                </div>
+            </div>
+        </div>
+        {/volist}
+    </div>
+</div>

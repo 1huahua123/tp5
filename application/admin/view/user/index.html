@@ -1,0 +1,57 @@
+{include file='/common/header'}
+{include file='/common/top'}
+<main class="content">
+    <div class="row">
+        <div class="col-sm-6">
+            <a href="{:url('admin/user/create')}" class="btn btn-primary btn-lg"><i class="bi bi-plus-circle">添加用户</i></a>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">昵称</th>
+                <th scope="col">账号</th>
+                <th scope="col">邮箱</th>
+                <th scope="col">角色</th>
+                <th scope="col">性别</th>
+                <th scope="col">状态</th>
+                <th scope="col">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              {volist name = "data" id = "vo" empty="暂时没有数据"}
+              <tr>
+                <td>{$vo.username}</td>
+                <td>{$vo.account}</td>
+                <td>{$vo.email}</td>
+                <td>{$vo.role.role_name}</td>
+                {if condition =  "$vo.gender == 1"}
+                <td>男</td>
+                {elseif condition = "$vo.gender == 2"}
+                <td>女</td>
+                {else /}
+                <td>隐藏</td>
+                {/if}
+                {if condition = "$vo.state == 1"}
+                <td><a href="{:url('admin/user/disable', ['id' => $vo.id])}" class="btn btn-success">正常</a></td>
+                {else if condition= "$vo.state == 2"/}
+                <td><a href="{:url('admin/user/enable', ['id' => $vo.id])}" class="btn btn-danger">禁用</a></td>
+                {/if}
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                        <a href="{:url('admin/user/delete', ['id' => $vo.id])}" class="btn btn-danger" onclick="return confirm('确定删除吗?');">删除</a>
+                        <a href="{:url('admin/user/update', ['id' => $vo.id])}" class="btn btn-warning">修改</a>
+                        <a href="{:url('admin/user/setpassword', ['id' => $vo.id])}" class="btn btn-success">重置密码</a>
+                    </div>
+                </td>
+              </tr>
+              {/volist}
+            </tbody>
+          </table>
+    </div>
+    <div style="padding-left: 30%;">
+      {$data->render()}
+    </div>
+</main>
+{include file='/common/footer'}

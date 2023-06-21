@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="AdminKit">
+	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="stylesheet" href="/tp5/public/static/fonts/node_modules/bootstrap-icons/font/bootstrap-icons.css">
+	<link rel="shortcut icon" href="/tp5/public/static/img/icons/icon-48x48.png">
+	<link rel="canonical" href="https://demo-basic.adminkit.io/" />
+
+	<title>游戏交流网站后台管理系统</title>
+
+	<link href="/tp5/public/static/css/app.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar js-sidebar">
+			<div class="sidebar-content js-simplebar">
+				<a class="sidebar-brand" href="{:url('admin/index/index')}">
+					<span class="align-middle">游戏交流网站管理系统</span>
+				</a>
+
+				<ul class="sidebar-nav">
+					{foreach $top_nav as $top_v}
+					<li class="sidebar-header">
+						{$top_v.auth_name}
+					</li>
+					<ul>
+						{foreach $second_nav as $second_v}
+						{if ($second_v.pid == $top_v.id)}
+						<li class="sidebar-item active">
+							<a class="sidebar-link" href="{:url(\'admin/\'.$second_v[\'auth_c\'].\'/\'.$second_v[\'auth_a\'])}">
+								<i class="{$second_v.auth_icon}"></i> <span class="align-middle">{$second_v.auth_name}</span>
+							</a>
+						</li>
+						{/if}
+						{/foreach}
+					</ul>
+					{/foreach}
+				</ul>
+			</div>
+		</nav>

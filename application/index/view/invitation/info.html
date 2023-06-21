@@ -1,0 +1,245 @@
+{include file='/common/head'}
+<body>
+{include file='/common/header'}
+<!-- ##### 导航栏 开始 ##### -->
+<div class="vizew-breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{:url('index/index/index')}"><i class="fa fa-home" aria-hidden="true"></i> 主页</a></li>
+                        <li class="breadcrumb-item"><a href="{:url('index/community/index')}"> 贴吧</a></li>
+                        <li class="breadcrumb-item"><a href="{:url('index/invitation/index', ['community_id' => $community_id])}"> {$community_name}</a></li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### 导航栏结束 ##### -->
+
+<section class="post-details-area mb-80">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8 col-xl-7">
+                <div class="post-details-content">
+                    <div class="blog-content">
+                        <div class="post-content mt-0">
+                            <a href="#" class="post-title mb-2">{$invitation_data.invitation_title}</a>
+                            <div class="d-flex justify-content-between mb-30">
+                                <div class="post-meta d-flex align-items-center">
+                                    <a href="#" class="post-author">{$invitation_data.user.username}</a>
+                                    <i class="fa fa-circle" aria-hidden="true"></i>
+                                    <a href="#" class="post-date">{$invitation_data.created_at}</a>
+                                </div>
+                                <div class="post-meta d-flex">
+                                    <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> {$invitation_data.invitation_comments}</a>
+                                    {if ($invitation_user_likes == 1)}
+                                    <a href="{:url('index/invitation/likes', ['invitation_id' => $invitation_data.id])}"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {$invitation_data.invitation_likes}</a>
+                                    {else if($invitataion_user_likes == 2)}
+                                    <a href="{:url('index/invitation/unlikes', ['invitation_id' => $invitation_data.id])}" onclick="return confirm('确定取消点赞吗？');"><i class="bi bi-hand-thumbs-up-fill"></i> {$invitation_data.invitation_likes}</a>
+                                    {/if}
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            {$invitation_data.invitation_content}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Post A Comment Area -->
+        <div class="post-a-comment-area">
+
+            <!-- Section Title -->
+            <div class="section-heading style-2">
+                <h4>评论</h4>
+                <div class="line"></div>
+            </div>
+
+            <!-- Reply Form -->
+            <div class="contact-form-area">
+                <form action="{:url('index/invitation/invitation_comments')}" method="post">
+                    <div class="row">
+                        <input type="hidden" name="invitation_id" value="{$invitation_data.id}">
+                        <div class="col-6">
+                            <textarea name="comment_content" id="intro_detail" cols="50" rows="10"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn vizew-btn mt-30" type="submit">评论</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Comment Area Start -->
+        <div class="comment_area clearfix mb-50">
+
+            <!-- Section Title -->
+            <div class="section-heading style-2">
+                <h4>评论列表</h4>
+                <div class="line"></div>
+            </div>
+
+            <ul>
+                {volist name="invitation_comments_data" id="invitation_comments_data" empty="暂时还没有评论"}
+                <!-- Single Comment Area -->
+                <li class="single_comment_area">
+                    <!-- Comment Content -->
+                    <div class="comment-content d-flex">
+                        <!-- Comment Author -->
+                        <div class="comment-author">
+                            <img src="/tp5/public{$invitation_comments_data.user.avatar}" alt="author">
+                        </div>
+                        <!-- Comment Meta -->
+                        <div class="comment-meta">
+                            <input type="hidden" id="invitation_id" value="{$invitation_comments_data.invitation_id}">
+                            <input type="hidden" id="reply_id" value="{$invitation_comments_data.user_id}">
+                            <a href="#" class="comment-date">{$invitation_comments_data.created_at}</a>
+                            <h6>{$invitation_comments_data.user.username}</h6>
+                            <p>{$invitation_comments_data.comment_content}</p>
+                            <div class="d-flex align-items-center">
+                                <a href="#" class="reply">回复</a>
+                                {if ($invitation_comments_data.user_id == $user_id)}
+                                <a href="{:url('index/Invitation/delete_comment', ['invitation_comments_id' => $invitation_comments_data.id])}" class="like">删除</a>
+                                {/if}
+                            </div>
+                        </div>
+                    </div>
+                    {notempty name="invitation_comments_reply_data"}
+                    {volist name="invitation_comments_reply_data" id="invitation_comments_reply_data"}
+                    {if ($invitation_comments_data.user.id == $invitation_comments_reply_data.comment_userid)}
+                    <ol class="children">
+                        <li class="single_comment_area">
+                            <!-- Comment Content -->
+                            <div class="comment-content d-flex">
+                                <!-- Comment Author -->
+                                <div class="comment-author">
+                                    <img src="/tp5/public{$invitation_comments_reply_data.user.avatar}" alt="author">
+                                </div>
+                                <!-- Comment Meta -->
+                                <div class="comment-meta">
+                                    <a href="#" class="comment-date">{$invitation_comments_reply_data.created_at}</a>
+                                    <h6>{$invitation_comments_reply_data.user.username}  回复：{$invitation_comments_reply_data.replyUser.username}</h6>
+                                    <p>{$invitation_comments_reply_data.reply_content}</p>
+                                    <div class="d-flex align-items-center">
+                                        <a href="#" class="reply">回复</a>
+                                        {if ($invitation_comments_reply_data.user_id == $reply_user_id)}
+                                        <a href="#" class="like">删除</a>
+                                        {/if}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ol>
+                    {/if}
+                    {/volist}
+                    {/notempty}
+                </li>
+                {/volist}
+            </ul>
+        </div>
+    </div>
+</section>
+<footer class="footer-area">
+    <div class="container">
+        <div class="row">
+            {include file='/common/foot_board_message'}
+            {include file='/common/foot_message_list'}
+            {include file='/common/foot_videos'}
+            {include file='/common/foot_address'}
+        </div>
+    </div>
+{include file='/common/foot'}
+    <script type="text/javascript" src="/tp5/public/static/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" src="/tp5/public/static/ueditor/ueditor.all.min.js"></script>
+    <script type="text/javascript" src="/tp5/public/static/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script>
+            $(".reply").click(function (){
+                $(".reply_form").remove();
+                let invitation_id = $('#invitation_id').val();
+                console.log(invitation_id);
+                $(this).parent().append("<div style='width: 400px;' class='reply_form'>" +
+                    "<form method='post'>" +
+                    "<textarea name='comment_content' id='intro_detail2' cols='20' rows='10'>" +
+                    "</textarea>" +
+                    "<a class=\"btn vizew-btn mt-30\" type='submit'>回复</a>" +
+                    "</form>" +
+                    "</div>");
+                UE.getEditor('intro_detail2',{
+                    initialFrameWidth: 10,
+                    initialFrameHeight: 200,
+                    initialFrameWidth: null,
+                    autoHeightEnabled: false,
+                });
+                var content = jsonData.journal_content;
+                var ue =  UE.getEditor('intro_detail2');
+                setTimeout(function(){
+                    UE.getEditor('content').setContent(content,false)
+                },200);//富文本加载会有时延，这样可以保证内容及时赋值上去了
+            });
+    </script>
+    <script>
+        UE.getEditor('intro_detail',{
+            initialFrameWidth: 100,
+            initialFrameHeight: 200,
+            initialFrameWidth: null,
+            autoHeightEnabled: false,
+        });
+    </script>
+    <script>
+        $(function(){
+            var content = jsonData.journal_content;
+            var ue =  UE.getEditor('intro_detail');
+            setTimeout(function(){
+                UE.getEditor('content').setContent(content,false)
+            },200);//富文本加载会有时延，这样可以保证内容及时赋值上去了
+        });
+    </script>
+    <script>
+        //实例化编辑器到id为 container 的 dom 容器上：
+        var ue = UE.getEditor('container');
+        //设置编辑器内容
+        ue.ready(function() {
+            ue.setContent(xx);
+        });
+        //追加编辑器内容
+        ue.ready(function() {
+            ue.setContent(xx, true);
+        });
+        //获取编辑器html内容
+        ue.ready(function() {
+            var html = ue.getContent();
+        });
+        ue.getContentTxt(); //获取纯文本内容
+        ue.getPlainTxt();  //获取保留格式的文本内容
+        ue.getContentTxt(); //获取纯文本内容
+        ue.hasContents();//判断编辑器是否有内容
+        ue.focus();//让编辑器获得焦点
+        ue.blur(); //让编辑器失去焦点
+        ue.isFocus();  //判断编辑器是否获得焦点
+        ue.setDisabled(); //设置当前编辑区域不可编辑
+        ue.setEnabled();   //设置当前编辑区域可以编辑
+        ue.setHide();   //隐藏编辑器
+        ue.setShow();  //显示编辑器
+        ue.selection.getText(); //获得当前选中的文本
+        //常用命令：
+        ue.execCommand('inserthtml', '<span>hello!</span>');   //在当前光标位置插入html内容
+        //设置当前选区文本格式：
+        ue.execCommand('bold'); //加粗
+        ue.execCommand('italic'); //加斜线
+        ue.execCommand('subscript'); //设置上标
+        ue.execCommand('supscript'); //设置下标
+        ue.execCommand('forecolor', '#FF0000'); //设置字体颜色
+        ue.execCommand('backcolor', '#0000FF'); //设置字体背景颜色
+        ue.execCommand('undo'); //回退编辑器内容
+        ue.execCommand('redo');  //撤销回退编辑器内容
+        ue.execCommand('source'); //切换源码和可视化编辑模式
+        ue.execCommand('selectall');//选中所有内容
+        ue.execCommand('cleardoc'); //清空内容
+        ue.execCommand('drafts');  //读取草稿箱
+        ue.execCommand('clearlocaldata');   //清空草稿箱
+    </script>
+

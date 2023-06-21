@@ -1,0 +1,84 @@
+{include file='/common/header'}
+{include file='/common/top'}
+
+    <main class="content">
+        <div class="container-fluid p-0">
+            <div class="mb-3">
+                <h1 class="h3 d-inline align-middle">个人主页</h1>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-xl-3">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Profile Details</h5>
+                        </div>
+                        <div class="card-body text-center">
+                            <img src="/tp5/public{$user_data.avatar}" alt="Christina Mason" class="img-fluid rounded-circle mb-2" width="128" height="128" />
+                            <h5 class="card-title mb-0">{$user_data.username}</h5>
+                            <div class="text-muted mb-2">{$user_data.email}</div>
+                            <div>
+                                <a class="btn btn-primary btn-sm" href="#">粉丝数量 {$user_data.fans}</a>
+                                <a class="btn btn-primary btn-sm" href="#"><span data-feather="message-square"></span>发布资讯 {$user_blog_nums}</a>
+                            </div>
+                        </div>
+                        <hr class="my-0" />
+                        <div class="card-body">
+                            <h5 class="h6 card-title">管理板块</h5>
+                            {volist name="user_plate" id="user_plate" empty="赞无管理的板块"}
+                            <a href="#" class="badge bg-primary me-1 my-1">{$user_plate.plate_name}</a>
+                            {/volist}
+                        </div>
+                        <hr class="my-0" />
+                        <div class="card-body">
+                            <h5 class="h6 card-title">About</h5>
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-1"><span data-feather="home" class="feather-sm me-1"></span> Lives in <a href="#">San Francisco, SA</a></li>
+
+                                <li class="mb-1"><span data-feather="briefcase" class="feather-sm me-1"></span> Works at <a href="#">GitHub</a></li>
+                                <li class="mb-1"><span data-feather="map-pin" class="feather-sm me-1"></span> From <a href="#">Boston</a></li>
+                            </ul>
+                        </div>
+                        <hr class="my-0" />
+                        <div class="card-body">
+                            <h5 class="h6 card-title">发布的资讯</h5>
+                            <ul class="list-unstyled mb-0">
+                                {volist name="user_blog_data" id="user_blog_data" empty="暂无发布的资讯"}
+                                <li class="mb-1"><a href="#">{$user_blog_data.blog_title}</a></li>
+                                {/volist}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8 col-xl-9">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">消息</h5>
+                        </div>
+                        <div class="card-body h-100">
+                            {volist name="comments_data" id="comments_data" empty="暂时没有消息"}
+                            {if ($comments_data.blog.blog_author == $user_data.id)}
+                            <div class="d-flex align-items-start">
+                                <img src="/tp5/public{$comments_data.user.avatar}" width="36" height="36" class="rounded-circle me-2" alt="Vanessa Tucker">
+                                <div class="flex-grow-1">
+                                    <small class="float-end text-navy">{$comments_data.created_at}</small>
+                                    <strong>{$comments_data.user.username}</strong>
+                                    评论&nbsp;&nbsp;&nbsp;&nbsp;<strong>{$comments_data.blog.blog_title}</strong><br/>
+                                    评论内容:&nbsp;&nbsp;&nbsp;&nbsp;<strong>{$comments_data.content}</strong>
+                                </div>
+                            </div>
+                            <hr />
+                            {/if}
+                            {/volist}
+                            <div class="d-grid">
+                                {$fenye}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+{include file='/common/footer'}

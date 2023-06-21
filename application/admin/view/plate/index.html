@@ -1,0 +1,48 @@
+{include file='/common/header'}
+{include file='/common/top'}
+<main class="content">
+    <div class="row">
+        <div class="col-sm-6">
+            <a href="{:url('admin/plate/create')}" class="btn btn-primary btn-lg"><i class="bi bi-plus-circle">添加板块</i></a>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">板块名称</th>
+                <th scope="col">板块管理员</th>
+                <th scope="col">创建时间</th>
+                <th scope="col">修改时间</th>
+                <th scope="col">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              {volist name = "data" id = "vo" empty="暂时没有数据"}
+              <tr>
+                <td>{$vo.plate_name}</td>
+                {if condition = "$vo.plate_admin == 0"}
+                <td>暂无管理员</td>
+                {else /}
+                <td>{$vo.user.username}</td>
+                {/if}
+                <td>{$vo.created_at}</td>
+                <td>{$vo.updated_at}</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                        <a href="{:url('admin/plate/delete',['id' => $vo.id])}" class="btn btn-danger" onclick="return confirm('确定删除吗?');">删除</a>
+                        <a href="{:url('admin/plate/update',['id' => $vo.id])}" class="btn btn-warning">修改</a>
+                        <a href="{:url('admin/plate/assign_admin',['id' => $vo.id])}" class="btn btn-success">分配管理员</a>
+                        <a href="{:url('admin/plate/detail',['id' => $vo.id])}" class="btn btn-info">查看所有资讯</a>
+                    </div>
+                </td>
+              </tr>
+              {/volist}
+            </tbody>
+          </table>
+    </div>
+    <div style="padding-left: 30%;">
+      {$data->render()}
+    </div>
+</main>
+{include file='/common/footer'}

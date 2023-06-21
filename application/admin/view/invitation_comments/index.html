@@ -1,0 +1,44 @@
+{include file='/common/header'}
+{include file='/common/top'}
+<main class="content">
+    <div class="mb-3">
+        <a href="{:url('admin/invitation/index', ['id' => $community_id])}" class="btn btn-primary">返回</a>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">发评用户</th>
+                <th scope="col">评论内容</th>
+                <th scope="col">评论状态</th>
+                <th scope="col">发评时间</th>
+                <th scope="col">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {volist name="invitation_comments" id="invitation_comments" empty="暂无评论信息"}
+            <tr>
+                <td>{$invitation_comments.user.username}</td>
+                <td>{$invitation_comments.comment_content}</td>
+                {if ($invitation_comments.comment_state == 1)}
+                <td>正常</td>
+                {else if($invitation_comments.comment_state == 2)}
+                <td>封禁</td>
+                {/if}
+                <td>{$invitation_comments.created_at}</td>
+                <td>
+                    <a href="{:url('admin/invitationComments/delete', ['invitation_comments_id' => $invitation_comments.id])}" class="btn btn-danger" onclick="return confirm('确定删除吗?');">删除</a>
+                    {if ($invitation_comments.comment_state == 1)}
+                    <a href="{:url('admin/invitationComments/ban', ['invitation_comments_id' => $invitation_comments.id])}" class="btn btn-warning">封禁</a>
+                    {else if($invitation_comments.comment_state == 2)}
+                    <a href="{:url('admin/invitationComments/removeBan', ['invitation_comments_id' => $invitation_comments.id])}" class="btn btn-success">解除封禁</a>
+                    {/if}
+                    <a href="{:url('admin/invitationComments/reply', ['invitation_comments_id' => $invitation_comments.id])}" class="btn btn-primary">查看回复</a>
+                </td>
+            </tr>
+            {/volist}
+            </tbody>
+        </table>
+    </div>
+</main>
+{include file='/common/footer'}

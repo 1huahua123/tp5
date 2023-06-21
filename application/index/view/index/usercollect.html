@@ -1,0 +1,74 @@
+{include file='/common/head'}
+
+<body>
+{include file='/common/header'}
+    <!-- ##### Breadcrumb Area Start ##### -->
+    <div class="vizew-breadcrumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{:url('index/index/index')}"><i class="fa fa-home" aria-hidden="true"></i> 主页</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">我的收藏</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Breadcrumb Area End ##### -->
+
+    <!-- ##### Archive Grid Posts Area Start ##### -->
+    <div class="vizew-grid-posts-area mb-80">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    <div class="row">
+                        {volist name="data" id="blog"}
+                        <!-- Single Blog Post -->
+                        <div class="col-12 col-md-6">
+                            <div class="single-post-area mb-50">
+                                <!-- Post Thumbnail -->
+                                <div class="post-thumbnail">
+                                    <img src="/tp5/public{$blog.blog.blog_cover}" style="width: 400px;height: 200px;" alt="">
+
+                                    <!-- Video Duration -->
+                                    <span class="video-duration">{$blog.blog.created_at}</span>
+                                </div>
+
+                                <!-- Post Content -->
+                                <div class="post-content">
+                                    <a href="{:url('index/index/detail', ['id' => $blog.blog.id])}" class="post-title">{$blog.blog.blog_title}</a>
+                                    <div class="post-meta d-flex">
+                                        <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> {$blog.blog.blog_comments}</a>
+                                        <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> {$blog.blog.blog_views}</a>
+                                        <a href="{:url('index/index/dianzan', ['id' => $blog.blog.id])}"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {$blog.blog.blog_likes}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/volist}
+                    </div>
+                    <!-- Pagination -->
+                    <nav class="mt-50">
+                        {$data->render()}
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Archive Grid Posts Area End ##### -->
+
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area">
+        <div class="container">
+            <div class="row">
+                {include file='/common/foot_board_message'}
+                {include file='/common/foot_message_list'}
+                {include file='/common/foot_videos'}
+                {include file='/common/foot_address'}
+            </div>
+        </div>
+
+        {include file='/common/foot'}

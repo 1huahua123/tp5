@@ -1,0 +1,21 @@
+{include file='/common/header'}
+{include file='/common/top'}
+<main class="content">
+    <div class="row">
+        <div class="text-center mt-4">
+            <h1 class="h2">{$data.blog_title}</h1>
+            <p class="lead">
+                {$data.user.username}|{$data.plate.plate_name}|{$data.created_at}
+            </p>
+        </div>
+        <div class="mb-3">
+            <p class="lead">{$data.blog_likes}<i class="bi bi-balloon-heart"></i></p>
+        </div>
+        <hr/>
+        <div class="mb-3"></div>
+        <div class="mb-3">
+            {$content}
+        </div>
+    </div>
+</main>
+{include file='/common/footer'}

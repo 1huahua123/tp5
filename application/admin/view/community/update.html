@@ -1,0 +1,57 @@
+{include file='/common/header'}
+{include file='/common/top'}
+<main class="content">
+    <div class="row">
+        <form action="{:url('admin/community/update_do')}" method="post">
+            <input type="hidden" name="id" value="{$data.id}">
+            <div class="text-center">
+                <img src="/tp5/public{$data.community_avatar}" alt="请上传头像" id="imgsrc" class="img-fluid rounded-circle" width="132" height="132" onclick="communityavatar()" />
+                <input type="file" name="uploadimg" id="uploadimg" value="上传头像" hidden/>
+                <input type="hidden" name="community_avatar" id="community_avatar" value="{$data.community_avatar}"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">社区名称</label>
+                <input class="form-control form-control-lg" type="text" name="community_name" placeholder="请输入社区名称" value="{$data.community_name}" >
+            </div>
+            <div class="mb-3">
+                <label class="form-label">社区简介</label>
+                <input class="form-control form-control-lg" type="text" name="community_profile" placeholder="请输入社区简介" value="{$data.community_profile}" />
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary btn-lg" onclick="return confirm('确定修改吗?');">修改</button>
+            </div>
+        </form>
+    </div>
+</main>
+{include file='/common/footer'}
+<script>
+    function communityavatar()
+    {
+        $('#uploadimg').click().change(function(event){
+            var formData = new FormData();
+            formData.append("file", $(this).get(0).files[0]);
+            $.ajax({
+                url:"{:url('admin/common/upload_community_avatar')}",
+                type:'POST',
+                data:formData,
+                cache: false,
+                contentType: false,    //不可缺
+                processData: false,    //不可缺
+                success:function(data){
+                    if(data.code ==  200){
+                        $('#community_avatar').val(data.filename);
+                        $('#imgsrc').attr("src","/tp5/public"+data.filename);
+                        alert(data.msg);
+                    }else if(data.code == 204){
+                        alert(data.msg);
+                    }else if(data.code == 205){
+                        alert(data.msg);
+                    }
+                },
+                error:function(data){
+                    alert("上传失败");
+                }
+            });
+        });
+    }
+</script>

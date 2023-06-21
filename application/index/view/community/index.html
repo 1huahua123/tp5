@@ -1,0 +1,90 @@
+{include file='/common/head'}
+<style>
+    .top-search-area{
+        border-radius: 15px;
+    }
+    .top-search-area .top-search-input{
+        background-color: #2b2b2b;
+        width: 200px;
+        height: 40px;
+        border-radius: 20px;
+    }
+    .top-search-area .btn{
+        border-radius: 20px;
+    }
+</style>
+<body>
+{include file='/common/header'}
+<!-- ##### 导航栏 开始 ##### -->
+<div class="vizew-breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{:url('index/index/index')}"><i class="fa fa-home" aria-hidden="true"></i> 主页</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"> 贴吧</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### 导航栏结束 ##### -->
+
+<div class="vizew-archive-list-posts-area mb-80">
+    <div class="container">
+        <div class="archive-catagory-view mb-50 d-flex align-items-center justify-content-between">
+            <div class="archive-catagory">
+                <h4><i class="bi bi-house"></i> 所有社区</h4>
+            </div>
+            <div class="top-search-area">
+                <form action="{:url('index/Community/search')}" method="post">
+                    <input class="top-search-input" type="search" name="keywords" id="topSearch" placeholder="搜索吧">
+                    <button type="submit" class="btn"><i class="fa fa-search" aria-hidden="true"></i></button>
+                </form>
+            </div>
+        </div>
+        {volist name="community_data" id="community_data" empty="暂时还没有社区"}
+        <div class="single-post-area style-2">
+            <div class="row align-items-center">
+                <div class="col-12 col-md-6">
+                    <div class="post-thumbnail">
+                        <img style="width: 500px; height: 300px;" src="/tp5/public{$community_data.community_avatar}" alt="网络出错啦">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="post-content mt-0">
+                        <a href="{:url('index/Invitation/index', ['community_id' => $community_data.id])}" class="post-title mb-2">{$community_data.community_name}</a>
+                        <div class="post-meta d-flex align-items-center mb-2">
+                            <span>{$community_data.community_profile}</span>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-circle" aria-hidden="true"></i>
+                            <a href="#" class="post-date">{$community_data.user.username}</a>
+                        </div>
+                        <p class="mb-2">{$community_data.created_at}</p>
+                        <div class="post-meta d-flex">
+                            <a href="#"><i class="bi bi-person-fill"></i> {$community_data.community_followers}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {/volist}
+        <nav class="mt-50">
+            {$data}
+        </nav>
+    </div>
+</div>
+
+<!-- ##### Footer Area Start ##### -->
+<footer class="footer-area">
+    <div class="container">
+        <div class="row">
+            {include file='/common/foot_board_message'}
+            {include file='/common/foot_message_list'}
+            {include file='/common/foot_videos'}
+            {include file='/common/foot_address'}
+        </div>
+    </div>
+{include file='/common/foot'}

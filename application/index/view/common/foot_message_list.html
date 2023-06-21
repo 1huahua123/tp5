@@ -1,0 +1,18 @@
+<!-- Footer Widget Area -->
+<div class="col-12 col-sm-6 col-xl-3">
+    <div class="footer-widget mb-70">
+        <h6 class="widget-title">留言展示</h6>
+        <!-- Twitter Slides -->
+        <div class="twitter-slides owl-carousel">
+            {volist name="message_data" id="message_data"}
+            <!-- Single Twitter Slide -->
+            <div class="single--twitter-slide">
+                <!-- Single Twit -->
+                <div class="single-twit">
+                    <p><i class="fa fa-twitter"></i> <span>{$message_data.email}</span>  <br />{$message_data.message_content}</p>
+                </div>
+            </div>
+            {/volist}
+        </div>
+    </div>
+</div>

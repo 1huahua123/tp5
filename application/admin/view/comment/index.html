@@ -1,0 +1,57 @@
+{include file='/common/header'}
+{include file='/common/top'}
+<main class="content">
+    <div class="mb-3">
+        <h1 class="h3 d-inline align-middle">评论列表</h1>
+    </div>
+    <hr style="background-color: rgb(154, 36, 213);">
+    <div class="row">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" style="width: 20%;">资讯标题</th>
+                <th scope="col">评论人</th>
+                <th scope="col">评论内容</th>
+                <th scope="col">点赞数</th>
+                <th scope="col">被踩数</th>
+                <th scope="col">状态</th>
+                <th scope="col">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              {volist name = "data" id = "vo" empty="暂时没有数据"}
+              <tr>
+                <td>{$vo.blog.blog_title}</td>
+                <td>{$vo.user.username}</td>
+                <td>{$vo.content}</td>
+                {if ($vo.like_num == 0)}
+                <td>null</td>
+                {else /}
+                <td>{$vo.like_num}</td>
+                {/if}
+                {if ($vo.bad_num == 0)}
+                <td>null</td>
+                {else /}
+                <td>{$vo.bad_num}</td>
+                {/if}
+                {if ($vo.state == 1)}
+                <td>
+                  <a href="{:url('admin/comment/disable_comment', ['id' => $vo.id])}" class="btn btn-success">正常</a>
+                </td>
+                {else /}
+                <td>
+                  <a href="{:url('admin/comment/disactivate_comment', ['id' => $vo.id])}" class="btn btn-danger">禁用</a>
+                </td>
+                {/if}
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                        <a href="{:url('admin/comment/delete', ['id' => $vo.id])}" class="btn btn-danger" onclick="return confirm('确定删除吗?');">删除</a>
+                    </div>
+                </td>
+              </tr>
+              {/volist}
+            </tbody>
+          </table>
+    </div>
+</main>
+{include file='/common/footer'}

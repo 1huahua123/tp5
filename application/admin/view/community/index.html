@@ -1,0 +1,44 @@
+{include file='/common/header'}
+{include file='/common/top'}
+<main class="content">
+    <div class="row">
+        <div class="col-sm-6">
+            <a href="{:url('admin/community/create')}" class="btn btn-primary btn-lg"><i class="bi bi-plus-circle">添加社区</i></a>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">社区名称</th>
+                    <th scope="col">社区简介</th>
+                    <th scope="col">社区头像</th>
+                    <th scope="col">社区管理员</th>
+                    <th scope="col">关注人数</th>
+                    <th scope="col">创建时间</th>
+                    <th scope="col">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {volist name="community" id="community" empty="暂无社区信息"}
+                <tr>
+                    <td>{$community.community_name}</td>
+                    <td>{$community.community_profile}</td>
+                    <td>
+                        <img src="/tp5/public{$community.community_avatar}" alt="" style="width: 30px; height: 30px;">
+                    </td>
+                    <td>{$community.user.username}</td>
+                    <td>{$community.community_followers}</td>
+                    <td>{$community.created_at}</td>
+                    <td>
+                        <a href="{:url('admin/community/delete', ['id' => $community.id])}" class="btn btn-danger" onclick="return confirm('确定删除吗?');">删除</a>
+                        <a href="{:url('admin/community/update', ['id' => $community.id])}" class="btn btn-warning">修改</a>
+                        <a href="{:url('admin/invitation/index', ['id' => $community.id])}" class="btn btn-success">查看所有帖子</a>
+                    </td>
+                </tr>
+                {/volist}
+            </tbody>
+        </table>
+    </div>
+</main>
+{include file='/common/footer'}

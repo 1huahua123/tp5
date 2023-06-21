@@ -1,0 +1,26 @@
+{include file='/common/header'}
+{include file='/common/top'}
+<main class="content">
+    <div class="row">
+        <h1>分配管理员</h1>
+        <form action="{:url('admin/plate/doassign_admin')}" method="post">
+            <div class="mb-3">
+                <label class="form-label">板块名称</label>
+                <input class="form-control form-control-lg" type="text" name="plate_name" value="{$plate.plate_name}" disabled/>
+                <input type="hidden" name="plate_id" value="{$plate.id}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">管理员</label>
+                <select name="plate_admin" class="form-select" aria-label="Default select example">
+                    {foreach $user as $v}
+                    <option value="{$v.id}">{$v.username}</option>
+                    {/foreach}
+                </select>
+            </div>
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-lg btn-primary">添加</button>
+            </div>
+        </form>
+    </div>
+</main>
+{include file='/common/footer'}

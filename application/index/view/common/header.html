@@ -1,0 +1,106 @@
+<!-- Preloader -->
+<div class="preloader d-flex align-items-center justify-content-center">
+    <div class="lds-ellipsis">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<!-- ##### Header Area Start ##### -->
+<header class="header-area">
+    <!-- Top Header Area -->
+    <div class="top-header-area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12 col-md-6">
+                    <!-- Breaking News Widget -->
+                    <div class="breaking-news-area d-flex align-items-center">
+                        <div class="news-title">
+                            <p>最新资讯:</p>
+                        </div>
+                        <div id="breakingNewsTicker" class="ticker">
+                            <ul>
+                                {volist name="new_blog" id="new_blog"}
+                                <li><a href="{:url('index/index/detail',['id' => $new_blog.id])}">{$new_blog.blog_title}</a></li>
+                                {/volist}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="top-meta-data d-flex align-items-center justify-content-end">
+                        <!-- Top Search Area -->
+                        <div class="top-search-area">
+                            <form action="{:url('index/common/search')}" method="post">
+                                <input type="search" name="keywords" id="topSearch" placeholder="Search...">
+                                <button type="submit" class="btn"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar Area -->
+    <div class="vizew-main-menu" id="sticker">
+        <div class="classy-nav-container breakpoint-off">
+            <div class="container">
+
+                <!-- Menu -->
+                <nav class="classy-navbar justify-content-between" id="vizewNav">
+
+                    <!-- Nav brand -->
+                    <a href="{:url('index/index/index')}" class="nav-brand"><img src="/tp5/public/static/img/core-img/logo.png" alt=""></a>
+
+                    <!-- Navbar Toggler -->
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    </div>
+
+                    <div class="classy-menu">
+
+                        <!-- Close Button -->
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
+
+                        <!-- Nav Start -->
+                        <div class="classynav">
+                            <ul>
+                                <li><a href="{:url('index/index/index')}">主页</a></li>
+                                <li><a href="{:url('index/Community/index')}">贴吧</a></li>
+                                <li><a href="{:url('index/index/plate_detail')}">板块</a>
+                                    <div class="megamenu">
+                                        {volist name="plate" id="vo"}
+                                        <ul class="single-mega cn-col-4">
+                                            <li><a href="{:url('index/index/blog_list',['id' => $vo.id])}">- {$vo.plate_name}</a></li>
+                                        </ul>
+                                        {/volist}
+                                    </div>
+                                </li>
+                                <li>
+                                    {if condition = "$user == '' "}
+                                    <a href="{:url('index/login/login')}">登陆</a>
+                                    {else /}
+                                    <a href="#"><img src="/tp5/public{$user.avatar}" alt="" class="rounded-circle" style="width: 60px;height: 60px;"></a>
+                                    <ul class="dropdown">
+                                        <li><a href="{:url('index/user/index', ['id' => $user.id])}">- 个人主页</a></li>
+                                        <li><a href="{:url('index/index/usercollect', ['id' => $user.id])}">- 我的收藏</a></li>
+                                        <li><a href="#">- 关注贴吧</a></li>
+                                        <li><a href="{:url('index/user/setup', ['id' => $user.id])}">- 设置</a></li>
+                                        <li><a href="{:url('index/login/logout')}">- 退出</a></li>
+                                    </ul>
+                                    {/if}
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Nav End -->
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ##### Header Area End ##### -->

@@ -1,0 +1,107 @@
+{include file='/common/head'}
+<body>
+{include file='/common/header'}
+<!-- ##### 导航栏 开始 ##### -->
+<div class="vizew-breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{:url('index/index/index')}"><i class="fa fa-home" aria-hidden="true"></i> 主页</a></li>
+                        <li class="breadcrumb-item"><a href="{:url('index/community/index')}"> 贴吧</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"> {$community_data['community_name']}</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### 导航栏结束 ##### -->
+<div class="vizew-grid-posts-area mb-80">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <div class="archive-catagory-view mb-50 align-items-center justify-content-between">
+                    <div class="row">
+                        <img src="/tp5/public{$community_data.community_avatar}" alt="网络出错啦" style="width: 750px;height: 450px">
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="archive-catagory">
+                            <h4> {$community_data['community_name']}</h4>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <h4>本吧简介:</h4>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <h4 style="color: #ffb0d0">{$community_data['community_profile']}</h4>
+                    </div>
+                    <br />
+                    <div class="top-search-area">
+                        <form action="{:url('index/Invitation/search')}" method="post">
+                            <input type="hidden" name="community_id" value="{$community_data.id}">
+                            <input type="search" name="keywords" id="topSearch" placeholder="吧内搜索帖">
+                            <button type="submit" class="btn"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        </form>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div>
+                            <span><span style="color: white">{$community_data['community_followers']}</span>人关注</span>
+                            {if ($community_user_interest == 1)}
+                            <a href="{:url('index/Community/interest', ['community_id' => $community_data['id']])}" class="btn btn-primary">关注</a>
+                            {else if($community_user_interest == 2)}
+                            <a href="{:url('index/Community/uninterest', ['community_id' => $community_data['id']])}" class="btn btn-danger" onclick="return confirm('确定取消关注吗?');">取消关注</a>
+                            {/if}
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div>
+                            <span>共有<span style="color: white">{$invitation_data_nums}</span>贴</span>
+                            <a href="{:url('index/Community/create_send_invitation', ['community_id' => $community_data['id']])}" class="btn btn-primary">我要发帖</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    {volist name="invitation_data" id="invitation_data" empty="暂时没有人发帖"}
+                    <div class="col-12 col-md-6">
+                        <div class="single-post-area mb-50">
+                            <div class="post-thumbnail">
+                                <img class="rounded-circle" src="/tp5/public{$invitation_data.user.avatar}" alt="网络出错啦" style="width: 100px;height: 100px;">
+                                &nbsp;&nbsp;<a href="#" class="h4" style="color: #7983ff">{$invitation_data.user.username}</a>
+                            </div>
+                            <!-- Post Content -->
+                            <div class="post-content">
+                                <a href="{:url('index/invitation/info', ['invitation_id' => $invitation_data.id])}" class="post-title">{$invitation_data.invitation_title}</a>
+                                <div class="post-meta d-flex">
+                                    <a href="{:url('index/invitation/info', ['invitation_id' => $invitation_data.id])}"><i class="fa fa-comments-o" aria-hidden="true"></i> {$invitation_data.invitation_comments}</a>
+                                    <a href="{:url('index/invitation/info', ['invitation_id' => $invitation_data.id])}"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {$invitation_data.invitation_likes}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {/volist}
+                    <nav class="mt-50">
+                        {$data}
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<footer class="footer-area">
+    <div class="container">
+        <div class="row">
+            {include file='/common/foot_board_message'}
+            {include file='/common/foot_message_list'}
+            {include file='/common/foot_videos'}
+            {include file='/common/foot_address'}
+        </div>
+    </div>
+{include file='/common/foot'}

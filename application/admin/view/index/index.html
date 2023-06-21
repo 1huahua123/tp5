@@ -1,0 +1,213 @@
+{include file='/common/header'}
+{include file='/common/top'}
+			<main class="content">
+				<div class="container-fluid p-0">
+					<div class="row">
+						<div class="col-xl-6 col-xxl-5 d-flex">
+							<div class="w-100">
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="card">
+											<div class="card-body">
+												<div class="row">
+													<div class="col mt-0">
+														<h5 class="card-title">网站注册人数</h5>
+													</div>
+
+													<div class="col-auto">
+														<div class="stat text-primary">
+															<i class="align-middle" data-feather="users"></i>
+														</div>
+													</div>
+												</div>
+												<h1 class="mt-1 mb-3">{$user_nums}人</h1>
+											</div>
+										</div>
+										<div class="card">
+											<div class="card-body">
+												<div class="row">
+													<div class="col mt-0">
+														<h5 class="card-title">管理员人数</h5>
+													</div>
+													<div class="col-auto">
+														<div class="stat text-primary">
+															<i class="align-middle" data-feather="users"></i>
+														</div>
+													</div>
+												</div>
+												<h1 class="mt-1 mb-3">{$admin_user_nums}人</h1>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="card">
+											<div class="card-body">
+												<div class="row">
+													<div class="col mt-0">
+														<h5 class="card-title">资讯数量</h5>
+													</div>
+
+													<div class="col-auto">
+														<div class="stat text-primary">
+															<i class="bi bi-layout-text-window"></i>
+														</div>
+													</div>
+												</div>
+												<h1 class="mt-1 mb-3">{$blog_nums}</h1>
+											</div>
+										</div>
+										<div class="card">
+											<div class="card-body">
+												<div class="row">
+													<div class="col mt-0">
+														<h5 class="card-title">发帖数</h5>
+													</div>
+
+													<div class="col-auto">
+														<div class="stat text-primary">
+															<i class="bi bi-layout-text-window"></i>
+														</div>
+													</div>
+												</div>
+												<h1 class="mt-1 mb-3">{$invitation_nums}</h1>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-xl-6 col-xxl-7">
+							<div class="card flex-fill w-100">
+								<div class="card-header">
+									<h5 class="card-title mb-0">Recent Movement</h5>
+								</div>
+								<div class="card-body py-3">
+									<div class="chart chart-sm">
+										<canvas id="chartjs-dashboard-line"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12 col-md-6 col-xxl-3 d-flex order-2 order-xxl-3">
+							<div class="card flex-fill w-100">
+								<div class="card-header">
+
+									<h5 class="card-title mb-0">Browser Usage</h5>
+								</div>
+								<div class="card-body d-flex">
+									<div class="align-self-center w-100">
+										<div class="py-3">
+											<div class="chart chart-xs">
+												<canvas id="chartjs-dashboard-pie"></canvas>
+											</div>
+										</div>
+
+										<table class="table mb-0">
+											<tbody>
+												<tr>
+													<td>Chrome</td>
+													<td class="text-end">4306</td>
+												</tr>
+												<tr>
+													<td>Firefox</td>
+													<td class="text-end">3801</td>
+												</tr>
+												<tr>
+													<td>IE</td>
+													<td class="text-end">1689</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+							<div class="card flex-fill w-100">
+								<div class="card-header">
+
+									<h5 class="card-title mb-0">Real-Time</h5>
+								</div>
+								<div class="card-body px-4">
+									<div id="world_map" style="height:350px;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 col-md-6 col-xxl-3 d-flex order-1 order-xxl-1">
+							<div class="card flex-fill">
+								<div class="card-header">
+
+									<h5 class="card-title mb-0">日历</h5>
+								</div>
+								<div class="card-body d-flex">
+									<div class="align-self-center w-100">
+										<div class="chart">
+											<div id="datetimepicker-dashboard"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12 col-lg-8 col-xxl-9 d-flex">
+							<div class="card flex-fill">
+								<div class="card-header">
+									<h5 class="card-title mb-0">发布资讯信息</h5>
+								</div>
+								<table class="table table-hover my-0">
+									<thead>
+										<tr>
+											<th>用户名</th>
+											<th class="d-none d-md-table-cell">发布板块</th>
+											<th>状态</th>
+											<th class="d-none d-xl-table-cell">阅读量</th>
+											<th class="d-none d-xl-table-cell">评论量</th>
+											<th class="d-none d-xl-table-cell">点赞量</th>
+											<th class="d-none d-xl-table-cell">发布时间</th>
+										</tr>
+									</thead>
+									<tbody>
+									{volist name="blog_user_data" id="blog_user_data"}
+										<tr>
+											<td>{$blog_user_data.user.username}</td>
+											<td class="d-none d-md-table-cell">{$blog_user_data.plate.plate_name}</td>
+											{if ($blog_user_data.blog_state == 1)}
+											<td><span class="badge bg-success">正常</span></td>
+											{elseif($blog_user_data.blog_state == 2)}
+											<td><span class="badge bg-danger">封禁</span></td>
+											{/if}
+											<td class="d-none d-md-table-cell">{$blog_user_data.blog_views}</td>
+											<td class="d-none d-md-table-cell">{$blog_user_data.blog_comments}</td>
+											<td class="d-none d-md-table-cell">{$blog_user_data.blog_likes}</td>
+											<td class="d-none d-xl-table-cell">{$blog_user_data.created_at}</td>
+										</tr>
+									{/volist}
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="col-12 col-lg-4 col-xxl-3 d-flex">
+							<div class="card flex-fill w-100">
+								<div class="card-header">
+
+									<h5 class="card-title mb-0">Monthly Sales</h5>
+								</div>
+								<div class="card-body d-flex w-100">
+									<div class="align-self-center chart chart-lg">
+										<canvas id="chartjs-dashboard-bar"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</main>
+
+{include file='/common/footer'}

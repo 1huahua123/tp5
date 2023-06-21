@@ -1,0 +1,51 @@
+{include file='/common/header'}
+{include file='/common/top'}
+    <main class="content">
+        <div class="row">
+            <div class="col-sm-6">
+                <a href="{:url('admin/auth/create')}" class="btn btn-primary btn-lg"><i class="bi bi-plus-circle">添加权限</i></a>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">权限名称</th>
+                    <th scope="col">控制器</th>
+                    <th scope="col">方法</th>
+                    <th scope="col">是否为菜单</th>
+                    <th scope="col">创建时间</th>
+                    <th scope="col">修改时间</th>
+                    <th scope="col">操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {volist name = "auth" id = "vo" empty="暂时没有数据"}
+                  <tr>
+                    {if ($vo.pid == 0)}
+                    <td>{$vo.auth_name}|--</td>
+                    {else /}
+                    <td>--{$vo.auth_name}</td>
+                    {/if}
+                    <td>{$vo.auth_c}</td>
+                    <td>{$vo.auth_a}</td>
+                    {if condition =  "$vo.is_nav == 0"}
+                    <td>是</td>
+                    {else /}
+                    <td>否</td>
+                    {/if}
+                    <td>{$vo.created_at}</td>
+                    <td>{$vo.updated_at}</td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                            <a href="{:url('admin/auth/delete',['id' => $vo.id])}" class="btn btn-danger" onclick="return confirm('确定删除吗?');">删除</a>
+                            <a href="{:url('admin/auth/update',['id' => $vo.id])}" class="btn btn-warning">修改</a>
+                        </div>
+                    </td>
+                  </tr>
+                  {/volist}
+                </tbody>
+              </table>
+        </div>
+    </main>
+{include file='/common/footer'}

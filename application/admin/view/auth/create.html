@@ -1,0 +1,44 @@
+{include file='/common/header'}
+{include file='/common/top'}
+    <main class="content">
+        <div class="row">
+            <form action="{:url('admin/auth/docreate')}" method="post">
+                <div class="mb-3">
+                    <label class="form-label">权限图标</label>
+                    <input class="form-control form-control-lg" type="text" name="auth_icon" placeholder="输入权限图标" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">权限名称</label>
+                    <input class="form-control form-control-lg" type="text" name="auth_name" placeholder="输入权限名称" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">上级权限</label>
+                    <select name="pid" class="form-select" aria-label="Default select example">
+                        <option selected value="0">顶级权限</option>
+                        {foreach $top_nav as $v}
+                        <option value="{$v.id}">{$v.auth_name}</option>
+                        {/foreach}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">权限控制器</label>
+                    <input class="form-control form-control-lg" type="text" name="auth_c" placeholder="输入权限控制器" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">权限操作方法</label>
+                    <input class="form-control form-control-lg" type="text" name="auth_a" placeholder="输入权限操作方法" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">是否为菜单</label>
+                    <select name="is_nav" class="form-select" aria-label="Default select example">
+                        <option selected value="0">是</option>
+                        <option value="1">否</option>
+                    </select>
+                </div>
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-lg btn-primary">添加</button>
+                </div>
+            </form>
+        </div>
+    </main>
+{include file='/common/footer'}

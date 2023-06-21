@@ -1,0 +1,102 @@
+{include file='/common/head'}
+<body>
+{include file='/common/header'}
+<!-- ##### Breadcrumb Area Start ##### -->
+<div class="vizew-breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{:url('index/index/index')}"><i class="fa fa-home" aria-hidden="true"></i> 主页</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">个人主页</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Breadcrumb Area End ##### -->
+
+<div class="vizew-grid-posts-area mb-80">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <div class="row">
+                    <h1>发布的资讯</h1>
+                </div>
+                <div class="row">
+                    {volist name="blog_user_data" id="blog_user_data"}
+                    <!-- Single Blog Post -->
+                    <div class="col-12 col-md-6">
+                        <div class="single-post-area mb-50">
+                            <!-- Post Thumbnail -->
+                            <div class="post-thumbnail">
+                                <img src="/tp5/public{$blog_user_data.blog_cover}" style="width: 400px;height: 200px;" alt="">
+
+                                <!-- Video Duration -->
+                                <span class="video-duration">{$blog_user_data.created_at}</span>
+                            </div>
+
+                            <!-- Post Content -->
+                            <div class="post-content">
+                                <a href="#" class="post-cata cata-sm cata-success">{$blog_user_data.plate.plate_name}</a>
+                                <a href="{:url('index/index/detail', ['id' => $blog_user_data.id])}" class="post-title">{$blog_user_data.blog_title}</a>
+                                <div class="post-meta d-flex">
+                                    <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> {$blog_user_data.blog_comments}</a>
+                                    <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> {$blog_user_data.blog_views}</a>
+                                    <a href="{:url('index/index/dianzan', ['id' => $blog_user_data.id])}"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {$blog_user_data.blog_likes}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {/volist}
+                </div>
+                <div class="row">
+                    {$blog_data}
+                </div>
+                <br/>
+                <div class="row">
+                    <h1>发布的帖子</h1>
+                    <div class="row">
+                        {volist name="invitation_user_data" id="invitation_user_data" empty="暂时发帖"}
+                        <div class="col-12 col-md-6">
+                            <div class="single-post-area mb-50">
+                                <div class="post-thumbnail">
+                                    <img class="rounded-circle" src="/tp5/public{$invitation_user_data.user.avatar}" alt="网络出错啦" style="width: 100px;height: 100px;">
+                                    &nbsp;&nbsp;<a href="#" class="h4" style="color: #7983ff">{$invitation_user_data.user.username}</a>
+                                </div>
+                                <!-- Post Content -->
+                                <div class="post-content">
+                                    <a href="{:url('index/invitation/info', ['invitation_id' => $invitation_user_data.id])}" class="post-title">{$invitation_user_data.invitation_title}</a>
+                                    <div class="post-meta d-flex">
+                                        <a href="{:url('index/invitation/info', ['invitation_id' => $invitation_user_data.id])}"><i class="fa fa-comments-o" aria-hidden="true"></i> {$invitation_user_data.invitation_comments}</a>
+                                        <a href="{:url('index/invitation/info', ['invitation_id' => $invitation_user_data.id])}"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {$invitation_user_data.invitation_likes}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/volist}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- ##### Login Area End ##### -->
+<!-- ##### Footer Area Start ##### -->
+<footer class="footer-area">
+    <div class="container">
+        <div class="row">
+            {include file='/common/foot_board_message'}
+            {include file='/common/foot_message_list'}
+            {include file='/common/foot_videos'}
+            {include file='/common/foot_address'}
+        </div>
+    </div>
+{include file='/common/foot'}

@@ -1,0 +1,58 @@
+{include file='/common/header'}
+{include file='/common/top'}
+<main class="content">
+    <div class="row">
+        <form action="{:url('admin/plate/docreate')}" method="post">
+            <div class="text-center">
+                <img src="/tp5/public/static/img/avatars/avatar6.jpeg" alt="请上传图片" id="imgsrc" class="img-fluid rounded-circle" width="132" height="132" onclick="plateimg()"/>
+                <input type="file" name="uploadimg" id="uploadimg" value="上传头像" hidden/>
+                <input type="hidden" name="plate_avatar" id="avatar" value="/static/img/avatars/avatar6.jpeg"/>
+                <input type="hidden" name="plate_thumb_avatar" id="thumb_avatar" value="/static/img/avatars/avatar6.jpeg"/>
+            </div> 
+            <div class="mb-3">
+                <label class="form-label">板块名称</label>
+                <input class="form-control form-control-lg" type="text" name="plate_name" placeholder="请输入板块名称" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">板块简介</label>
+                <input class="form-control form-control-lg" type="text" name="plate_profile" placeholder="请输入板块简介" />
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary btn-lg">添加</button>
+            </div>
+        </form>
+    </div>
+</main>
+{include file='/common/footer'}
+<script>
+    function plateimg()
+    {
+        $('#uploadimg').click().change(function(event){
+            var formData = new FormData();
+            formData.append("file", $(this).get(0).files[0]);
+            $.ajax({
+                url:"{:url('admin/common/upload_plate_avatar')}",
+                type:'POST',
+                data:formData,
+                cache: false,
+                contentType: false,    //不可缺
+                processData: false,    //不可缺
+                success:function(data){
+                    if(data.code ==  200){
+                        $('#avatar').val(data.filename);
+                        $('#thumb_avatar').val(data.thumb);
+                        $('#imgsrc').attr("src","/tp5/public"+data.filename);
+                        alert(data.msg);
+                    }else if(data.code == 204){
+                        alert(data.msg);
+                    }else if(data.code == 205){
+                        alert(data.msg);
+                    }
+                },
+                error:function(data){
+                    alert("上传失败");
+                }
+            });
+        });
+    }
+</script>

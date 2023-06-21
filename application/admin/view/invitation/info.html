@@ -1,0 +1,19 @@
+{include file='/common/header'}
+{include file='/common/top'}
+<main class="content">
+    <div class="mb-3">
+        <a href="{:url('admin/invitation/index', ['id' => $data.community_id])}" class="btn btn-primary">返回</a>
+    </div>
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <div class="m-sm-4">
+                    <div class="mb-3">
+                        {$data.invitation_content}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{include file='/common/footer'}

@@ -1,0 +1,16 @@
+<!-- Footer Widget Area -->
+<div class="col-12 col-sm-6 col-xl-3">
+    <div class="footer-widget mb-70">
+        <!-- Logo -->
+        <!-- <a href="index.html" class="foo-logo d-block mb-4"><img src="/tp5/public/static/img/core-img/logo2.png" alt=""></a> -->
+        <h6>留言板</h6>
+        <p>留下您宝贵的发言</p>
+        <!-- Footer Newsletter Area -->
+        <div class="footer-nl-area">
+            <form action="{:url('index/common/send_board_message')}" method="post">
+                <input type="text" name="message_content" class="form-control" id="nlEmail" placeholder="请输入您的留言内容">
+                <button>发送</button>
+            </form>
+        </div>
+    </div>
+</div>

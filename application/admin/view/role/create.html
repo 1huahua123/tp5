@@ -1,0 +1,16 @@
+{include file='/common/header'}
+{include file='/common/top'}
+<main class="content">
+    <div class="row">
+        <form action="{:url('admin/role/docreate')}" method="post">
+            <div class="mb-3">
+                <label class="form-label">角色名称</label>
+                <input class="form-control form-control-lg" type="text" name="role_name" placeholder="输入角色名称" />
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary btn-lg">添加</button>
+            </div>
+        </form>
+    </div>
+</main>
+{include file='/common/footer'}

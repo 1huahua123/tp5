@@ -1,0 +1,160 @@
+{include file='/common/head'}
+
+<body>
+{include file='/common/header'}
+    <!-- ##### Breadcrumb Area Start ##### -->
+    <div class="vizew-breadcrumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{:url('index/index/index')}"><i class="fa fa-home" aria-hidden="true"></i> 主页</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{$keyword}</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Breadcrumb Area End ##### -->
+
+    <!-- ##### Archive Grid Posts Area Start ##### -->
+    <div class="vizew-grid-posts-area mb-80">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    <div class="row">
+                        {volist name="data" id="blog"}
+                        <!-- Single Blog Post -->
+                        <div class="col-12 col-md-6">
+                            <div class="single-post-area mb-50">
+                                <!-- Post Thumbnail -->
+                                <div class="post-thumbnail">
+                                    <img src="/tp5/public{$blog.blog_cover}" style="width: 400px;height: 200px;" alt="">
+
+                                    <!-- Video Duration -->
+                                    <span class="video-duration">{$blog.created_at}</span>
+                                </div>
+
+                                <!-- Post Content -->
+                                <div class="post-content">
+                                    <a href="{:url('index/index/detail', ['id' => $blog.id])}" class="post-title">{$blog.blog_title}</a>
+                                    <div class="post-meta d-flex">
+                                        <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> {$blog.blog_comments}</a>
+                                        <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> {$blog.blog_views}</a>
+                                        <a href="{:url('index/index/dianzan', ['id' => $blog.id])}"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {$blog.blog_likes}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/volist}
+                    </div>
+                    <!-- Pagination -->
+                    <nav class="mt-50">
+                        {$data->render()}
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Archive Grid Posts Area End ##### -->
+
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area">
+        <div class="container">
+            <div class="row">
+                <!-- Footer Widget Area -->
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="footer-widget mb-70">
+                        <!-- Logo -->
+                        <a href="index.html" class="foo-logo d-block mb-4"><img src="/tp5/public/static/img/core-img/logo2.png" alt=""></a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
+                        <!-- Footer Newsletter Area -->
+                        <div class="footer-nl-area">
+                            <form action="#" method="post">
+                                <input type="email" name="nl-email" class="form-control" id="nlEmail" placeholder="Your email">
+                                <button type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Widget Area -->
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="footer-widget mb-70">
+                        <h6 class="widget-title">Latest Twister</h6>
+                        <!-- Twitter Slides -->
+                        <div class="twitter-slides owl-carousel">
+
+                            <!-- Single Twitter Slide -->
+                            <div class="single--twitter-slide">
+                                <!-- Single Twit -->
+                                <div class="single-twit">
+                                    <p><i class="fa fa-twitter"></i> <span>@Leonard</span> I am so happy because I found this magazine, and it just made Vizeweasier. Thanks for sharing</p>
+                                </div>
+                                <!-- Single Twit -->
+                                <div class="single-twit">
+                                    <p><i class="fa fa-twitter"></i> <span>@Leonard</span> I am so happy because I found this magazine, and it just made Vizeweasier. Thanks for sharing</p>
+                                </div>
+                            </div>
+
+                            <!-- Single Twitter Slide -->
+                            <div class="single--twitter-slide">
+                                <!-- Single Twit -->
+                                <div class="single-twit">
+                                    <p><i class="fa fa-twitter"></i> <span>@Colorlib</span> I am so happy because I found this magazine, and it just made Vizeweasier. Thanks for sharing</p>
+                                </div>
+                                <!-- Single Twit -->
+                                <div class="single-twit">
+                                    <p><i class="fa fa-twitter"></i> <span>@Colorlib</span> I am so happy because I found this magazine, and it just made Vizeweasier. Thanks for sharing</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Widget Area -->
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="footer-widget mb-70">
+                        <h6 class="widget-title">Sport Videos</h6>
+
+                        <!-- Single Blog Post -->
+                        <div class="single-blog-post d-flex">
+                            <div class="post-thumbnail">
+                                <img src="/tp5/public/static/img/bg-img/1.jpg" alt="">
+                            </div>
+                            <div class="post-content">
+                                <a href="single-post.html" class="post-title">DC Shoes: gymkhana the</a>
+                                <div class="post-meta d-flex justify-content-between">
+                                    <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 14</a>
+                                    <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 34</a>
+                                    <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 84</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Single Blog Post -->
+                        <div class="single-blog-post d-flex">
+                            <div class="post-thumbnail">
+                                <img src="/tp5/public/static/img/bg-img/2.jpg" alt="">
+                            </div>
+                            <div class="post-content">
+                                <a href="single-post.html" class="post-title">Sweet Yummy Chocolatea Tea</a>
+                                <div class="post-meta d-flex justify-content-between">
+                                    <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 14</a>
+                                    <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 34</a>
+                                    <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 84</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                {include file='/common/foot_address'}
+            </div>
+        </div>
+
+{include file='/common/foot'}

@@ -1,0 +1,75 @@
+{include file='/common/head'}
+<body>
+{include file='/common/header'}
+<!-- ##### Breadcrumb Area Start ##### -->
+<div class="vizew-breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{:url('index/index/index')}"><i class="fa fa-home" aria-hidden="true"></i> 主页</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">登陆</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Breadcrumb Area End ##### -->
+
+<!-- ##### Login Area Start ##### -->
+<div class="vizew-login-area section-padding-80">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6">
+                <div class="login-content">
+                    <!-- Section Title -->
+                    <div class="section-heading">
+                        <h4>很高兴你回来了！</h4>
+                        <div class="line"></div>
+                    </div>
+
+                    <form action="{:url('index/login/dologin')}" method="post">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-circle"></i></span>
+                            </div>
+                            <input type="text" class="form-control" name="account" placeholder="请输入账号" style="background: white;">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-shield-lock"></i></span>
+                            </div>
+                            <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="请输入密码" style="background: white;">
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox mr-sm-2">
+                                <input type="checkbox" name="remeber_me" class="custom-control-input" id="customControlAutosizing" value="1">
+                                <label class="custom-control-label" for="customControlAutosizing">记住我</label>
+                            </div>
+                        </div>
+                        <div class="form-gruop">
+                            <a href="{:url('index/login/regist')}" style="color: aqua;">注册账号</a>
+                            <a href="{:url('index/login/forgot_password')}" style="color: tomato;">忘记密码</a>
+                        </div>
+                        <button type="submit" class="btn vizew-btn w-100 mt-30">登陆</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Login Area End ##### -->
+<!-- ##### Footer Area Start ##### -->
+<footer class="footer-area">
+    <div class="container">
+        <div class="row">
+            {include file='/common/foot_board_message'}
+            {include file='/common/foot_message_list'}
+            {include file='/common/foot_videos'}
+            {include file='/common/foot_address'}
+        </div>
+    </div>
+
+{include file='/common/foot'}
